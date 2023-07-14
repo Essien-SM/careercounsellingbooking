@@ -1,6 +1,37 @@
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
+<?php
+
+session_start();
+
+if(isset($_SESSION["user"])){
+    if(($_SESSION["user"])=="" or $_SESSION['usertype']!='a'){
+        header("location: ../login.php");
+    }else{
+        $useremail=$_SESSION["user"];
+    }
+
+}else{
+    header("location: ../login.php");
+}
+
+
+//import database
+include("../connection.php");
+
+$sqlmain= "select * from admin where aemail=?";
+$stmt = $database->prepare($sqlmain);
+$stmt->bind_param("s",$useremail);
+$stmt->execute();
+$userrow = $stmt->get_result();
+$userfetch=$userrow->fetch_assoc();
+
+
+
+    ?>
+
+
     <!-- Main Content -->
     <div id="content">
 
@@ -132,7 +163,7 @@
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin@gmail.com</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo substr($useremail,0,22)  ?></span>
                         <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                     </a>
                     <!-- Dropdown - User Information -->

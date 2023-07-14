@@ -18,8 +18,6 @@
 <body>
     <?php
 
-    //learn from w3schools.com
-
     session_start();
 
     if(isset($_SESSION["user"])){
@@ -42,10 +40,10 @@
         //print_r($_POST);
         $result= $database->query("select * from webuser");
         $name=$_POST['name'];
-        $nic=$_POST['nic'];
+        $idnum=$_POST['counidnum'];
         $spec=$_POST['spec'];
         $email=$_POST['email'];
-        $tele=$_POST['Tele'];
+        $tel=$_POST['tel'];
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
         
@@ -56,10 +54,11 @@
                 $error='1';
             }else{
 
-                $sql1="insert into doctor(docemail,docname,docpassword,docnic,doctel,specialties) values('$email','$name','$password','$nic','$tele',$spec);";
-                $sql2="insert into webuser values('$email','d')";
+                $sql1="insert into counsellor(counemail,counname,counpassword,counidnum,countel,specialties) values('$email','$name','$password','$idnum','$tel',$spec);";
+                $sql2="insert into webuser values('$email','c')";
                 $database->query($sql1);
                 $database->query($sql2);
+                
 
                 //echo $sql1;
                 //echo $sql2;
@@ -80,7 +79,7 @@
     }
     
 
-    header("location: doctors.php?action=add&error=".$error);
+    header("location:counsellor.php");
     ?>
     
    

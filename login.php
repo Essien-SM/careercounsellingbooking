@@ -9,7 +9,12 @@
   <meta name="generator" content="Hugo 0.84.0">
   <title>Signin Template · Bootstrap v5.0</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     .bd-placeholder-img {
@@ -29,10 +34,10 @@
 
 
   <!-- Custom styles for this template -->
-  <link href="login.css" rel="stylesheet">
+  <link href="signin.css" rel="stylesheet">
 </head>
 
-<body class="">
+<body>
 
   <?php
 
@@ -102,7 +107,7 @@
           //   counsellor dashbord
           $_SESSION['user'] = $email;
           $_SESSION['usertype'] = 'c';
-          header('location: counsellor/index.php');
+          header('location: counsellors/index.php');
         } else {
           $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
         }
@@ -118,29 +123,34 @@
 
   <main class="form-signin">
     <form action="" method="POST">
-      <div class="text-center">
-        <h1 class=" mb-3 fw-normal">Welcome Back!</h1>
-        <p>Login with your details to continue</p>
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="text-center">
+            <h1 class=" mb-3 fw-normal">Welcome Back!</h1>
+            <p>Login with your details to continue</p>
+          </div>
+
+          <div class="form-group">
+            <label for="usermail">Email address</label>
+            <input type="email" class="form-control" name="useremail">
+          </div>
+          <div class="form-group">
+            <label for="userpassword">Password</label>
+            <input type="Password" name="userpassword" class="form-control" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <?php echo $error ?>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+          <p class="mt-3 mb-3 text-muted">Already Have an Account?<a class="font-weight-bold" href="signup.php">Sign In</a></p>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="useremail">Email address</label>
-        <input type="email" name="useremail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-      </div>
-      <div class="form-group">
-        <label for="userpassword">Password</label>
-        <input type="Password" name="userpassword" class="form-control" id="exampleInputPassword1" required>
-      </div>
-      <div class="form-group">
-        <?php echo $error ?>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      <p class="mt-3 mb-3 text-muted">Don't have account? <a href="signup.php">Sign Up</a></p>
     </form>
   </main>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

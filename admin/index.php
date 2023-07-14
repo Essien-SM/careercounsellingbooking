@@ -3,18 +3,53 @@ include('includes/navbar.php');
 include('includes/topbar.php');
 ?>
 
+
+
 <div class="container-fluid">
     <!-- Sidebar Toggle (Topbar) -->
 
     <div class="d-sm-flex align-items-center justify-content-between mb-3 gap-4">
-        <div class="" style="display:flex; flex-direction:row; margin:auto;">
-            <input class="form-control" type="text" aria-label="default input example" style="width: 20rem; margin-right:0.4rem">
-            <button type="button" class="btn btn-primary">
-                Search
-            </button>
-        </div>
+        <form action="counsellor.php" method="post">
+            <div class="" style="display:flex; flex-direction:row; margin:auto;">
+                <input class="form-control" type="search" name="search" aria-label="default input example" style="width: 20rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
+
+                <?php
+                        echo '<datalist id="counsellors">';
+                        $list11 = $database->query("select  counname,counemail from counsellor;");
+
+                        for ($y = 0; $y < $list11->num_rows; $y++) {
+                            $row00 = $list11->fetch_assoc();
+                            $d = $row00["counname"];
+                            $c = $row00["counemail"];
+                            echo "<option value='$d'><br/>";
+                            echo "<option value='$c'><br/>";
+                        };
+
+                        echo ' </datalist>';
+                        ?>
+
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+        </form>
         <div>
-            <p class="text-center">Today's Date</p>
+            <p class="text-center">
+            <?php
+                        date_default_timezone_set('Asia/Kolkata');
+
+                        $today = date('Y-m-d');
+                        echo $today;
+
+
+                        $studentrow = $database->query("select  * from  student;");
+                        $counsellorrow = $database->query("select  * from  counsellor;");
+                        $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
+                        $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
+
+
+                        ?>
+            </p>
         </div>
     </div>
 
@@ -34,8 +69,11 @@ include('includes/topbar.php');
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                2</div>
-                            <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">Advisors</div>
+                                <?php echo $counsellorrow->num_rows  ?>
+                            </div>
+                            <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">
+                                Advisors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -52,8 +90,11 @@ include('includes/topbar.php');
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                3</div>
-                            <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">Students</div>
+                            <?php echo $studentrow->num_rows  ?>
+                        </div>
+                            <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">
+                                Students &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -70,8 +111,11 @@ include('includes/topbar.php');
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                1</div>
-                            <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">New Booking</div>
+                                <?php echo $appointmentrow->num_rows  ?>
+                            </div>
+                            <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">
+                                New Booking &nbsp;&nbsp;
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -86,8 +130,11 @@ include('includes/topbar.php');
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                3</div>
-                            <div class="h5 text-xs font-weight-bold text-gray-900 text-uppercase mb-1">Today Session</div>
+                                <?php echo $schedulerow->num_rows  ?>
+                            </div>
+                            <div class="h5 text-xs font-weight-bold text-gray-900 text-uppercase mb-1">
+                                Today Session
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -195,7 +242,9 @@ include('includes/topbar.php');
 
                 <!-- Content Column -->
                 <div class="col-lg-6 mb-4">
-                    <h4 class="text-primary font-weight-bold">Upcoming Appointments until Next Monday</h4>
+                    <h4 class="text-primary font-weight-bold">
+                        Upcoming Appointments until Next <?php echo date("l", strtotime("+1 week")); ?>
+                    </h4>
                     <p>Here's Quick access to Upcoming Appointments until 7 days
                         More details available in @Appointment section.</p>
 
@@ -214,7 +263,66 @@ include('includes/topbar.php');
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                                $nextweek = date("Y-m-d", strtotime("+1 week"));
+                                                $sqlmain = "select appointment.appoid,schedule.scheduleid,schedule.title,counsellor.counname,student.stuname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today'  and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
 
+                                                $result = $database->query($sqlmain);
+
+                                                if ($result->num_rows == 0) {
+                                                    echo '<tr>
+                                                    <td colspan="3">
+                                                    <br><br><br><br>
+                                                    <center>
+                                                    <img src="../img/notfound.svg" width="25%">
+                                                    
+                                                    <br>
+                                                    <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">We  couldnt find anything related to your keywords !</p>
+                                                    <a class="non-style-link" href="appointment.php"><button  class="login-btn btn-primary-soft btn"  style="display: flex;justify-content: center;align-items: center;margin-left:20px;">&nbsp; Show all Appointments &nbsp;</font></button>
+                                                    </a>
+                                                    </center>
+                                                    <br><br><br><br>
+                                                    </td>
+                                                    </tr>';
+                                                } else {
+                                                    for ($x = 0; $x < $result->num_rows; $x++) {
+                                                        $row = $result->fetch_assoc();
+                                                        $appoid = $row["appoid"];
+                                                        $scheduleid = $row["scheduleid"];
+                                                        $title = $row["title"];
+                                                        $counname = $row["counname"];
+                                                        $scheduledate = $row["scheduledate"];
+                                                        $scheduletime = $row["scheduletime"];
+                                                        $stuname = $row["stuname"];
+                                                        $apponum = $row["apponum"];
+                                                        $appodate = $row["appodate"];
+                                                        echo '<tr>
+
+
+                                                        <td style="text-align:center;font-size:23px;font-weight:500; color: var(--btnnicetext);padding:20px;">
+                                                            ' . $apponum . '
+                                                            
+                                                        </td>
+
+                                                        <td style="font-weight:600;"> &nbsp;' .
+
+                                                            substr($stuname, 0, 25)
+                                                            . '</td >
+                                                        <td style="font-weight:600;"> &nbsp;' .
+
+                                                            substr($counname, 0, 25)
+                                                            . '</td >
+                                                           
+                                                        
+                                                        <td>
+                                                        ' . substr($title, 0, 15) . '
+                                                        </td>
+
+                                                    </tr>';
+                                                    }
+                                                }
+
+                                                ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -230,9 +338,13 @@ include('includes/topbar.php');
 
                 </div>
                 <div class="col-lg-6 mb-4">
-                    <h4 class="text-primary font-weight-bold">Upcoming Sessions until Next Wednesday</h4>
-                    <p>Here's Quick access to Upcoming Sessions that Scheduled until 7 days
-                        Add,Remove and Many features available in @Schedule section.</p>
+                    <h4 class="text-primary font-weight-bold">
+                        Upcoming Sessions until Next <?php echo date("l", strtotime("+1 week")); ?>
+                    </h4>
+                    <p>
+                        Here's Quick access to Upcoming Sessions that Scheduled until 7 days
+                        Add,Remove and Many features available in @Schedule section.
+                    </p>
 
                     <!-- Project Card Example -->
                     <div class="card shadow mb-1">
@@ -248,7 +360,53 @@ include('includes/topbar.php');
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                                $nextweek = date("Y-m-d", strtotime("+1 week"));
+                                                $sqlmain = "select schedule.scheduleid,schedule.title,counsellor.counname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today' and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
+                                                $result = $database->query($sqlmain);
 
+                                                if ($result->num_rows == 0) {
+                                                    echo '<tr>
+                                                    <td colspan="4">
+                                                    <br><br><br><br>
+                                                    <center>
+                                                    <img src="../img/notfound.svg" width="25%">
+                                                    
+                                                    <br>
+                                                    <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">We  couldnt find anything related to your keywords !</p>
+                                                    <a class="non-style-link" href="schedule.php"><button  class="login-btn btn-primary-soft btn"  style="display: flex;justify-content: center;align-items: center;margin-left:20px;">&nbsp; Show all Sessions &nbsp;</font></button>
+                                                    </a>
+                                                    </center>
+                                                    <br><br><br><br>
+                                                    </td>
+                                                    </tr>';
+                                                } else {
+                                                    for ($x = 0; $x < $result->num_rows; $x++) {
+                                                        $row = $result->fetch_assoc();
+                                                        $scheduleid = $row["scheduleid"];
+                                                        $title = $row["title"];
+                                                        $counname = $row["counname"];
+                                                        $scheduledate = $row["scheduledate"];
+                                                        $scheduletime = $row["scheduletime"];
+                                                        $nop = $row["nop"];
+                                                        echo '<tr>
+                                                        <td style="padding:20px;"> &nbsp;' .
+                                                            substr($title, 0, 30)
+                                                            . '</td>
+                                                        <td>
+                                                        ' . substr($counname, 0, 20) . '
+                                                        </td>
+                                                        <td style="text-align:center;">
+                                                            ' . substr($scheduledate, 0, 10) . ' ' . substr($scheduletime, 0, 5) . '
+                                                        </td>
+
+                
+                                                       
+                                                    </tr>';
+                                                    }
+                                                }
+
+                                                ?>
                                     </tbody>
                                 </table>
                             </div>
