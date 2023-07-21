@@ -10,18 +10,26 @@ include('includes/topbar.php');
         <a href="index.php"><button class="h3 mb-2 btn btn-primary" type="button">
                 < Back </button></a>
 
-        <p class="text-center">
-            <?php
-
-            date_default_timezone_set('Asia/Kolkata');
-
-            $today = date('Y-m-d');
-            echo $today;
-
-            $list110 = $database->query("select  * from  schedule;");
-
-            ?>
-        </p>
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h3">
+                    <?php
+        
+                    date_default_timezone_set('Asia/Kolkata');
+        
+                    $today = date('Y-m-d');
+                    echo $today;
+        
+                    $list110 = $database->query("select  * from  schedule;");
+        
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
 
     <!-- Page Heading -->

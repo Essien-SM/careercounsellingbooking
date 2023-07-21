@@ -30,14 +30,22 @@ include('includes/topbar.php');
                 </button>
             </div>
         </form>
-        <p class="text-center">
-            <?php
-            date_default_timezone_set('Asia/Kolkata');
-
-            $date = date('Y-m-d');
-            echo $date;
-            ?>
-        </p>
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h3">
+                    <?php
+                    date_default_timezone_set('Asia/Kolkata');
+        
+                    $date = date('Y-m-d');
+                    echo $date;
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
     <div class="card shadow mb-1 ">
         <div class="card-header py-3">
@@ -231,7 +239,7 @@ include('includes/topbar.php');
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="student.php"><input type="button" value="OK" class="login-btn btn-primary-soft btn" ></a>
+                                    <a href="students.php"><input type="button" value="OK" class="login-btn btn-primary-soft btn" ></a>
                                 
                                     
                                 </td>

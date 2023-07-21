@@ -14,42 +14,50 @@ include('includes/topbar.php');
                 <input class="form-control" type="search" name="search" aria-label="default input example" style="width: 35rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
 
                 <?php
-                        echo '<datalist id="counsellors">';
-                        $list11 = $database->query("select  counname,counemail from counsellor;");
+                echo '<datalist id="counsellors">';
+                $list11 = $database->query("select  counname,counemail from counsellor;");
 
-                        for ($y = 0; $y < $list11->num_rows; $y++) {
-                            $row00 = $list11->fetch_assoc();
-                            $d = $row00["counname"];
-                            $c = $row00["counemail"];
-                            echo "<option value='$d'><br/>";
-                            echo "<option value='$c'><br/>";
-                        };
+                for ($y = 0; $y < $list11->num_rows; $y++) {
+                    $row00 = $list11->fetch_assoc();
+                    $d = $row00["counname"];
+                    $c = $row00["counemail"];
+                    echo "<option value='$d'><br/>";
+                    echo "<option value='$c'><br/>";
+                };
 
-                        echo ' </datalist>';
-                        ?>
+                echo ' </datalist>';
+                ?>
 
                 <button type="submit" class="btn btn-primary">
                     Search
                 </button>
             </div>
         </form>
-        <div>
-            <p class="text-center">
-            <?php
-                        date_default_timezone_set('Asia/Kolkata');
 
-                        $today = date('Y-m-d');
-                        echo $today;
+        <div class="d-flex">
 
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h3">
+                    <?php
+                    date_default_timezone_set('Asia/Kolkata');
 
-                        $studentrow = $database->query("select  * from  student;");
-                        $counsellorrow = $database->query("select  * from  counsellor;");
-                        $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
-                        $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
+                    $today = date('Y-m-d');
+                    echo $today;
 
 
-                        ?>
-            </p>
+                    $studentrow = $database->query("select  * from  student;");
+                    $counsellorrow = $database->query("select  * from  counsellor;");
+                    $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
+                    $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
+
+
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
         </div>
     </div>
 
@@ -90,8 +98,8 @@ include('includes/topbar.php');
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="h5 mb-0 font-weight-bold text-primary">
-                            <?php echo $studentrow->num_rows  ?>
-                        </div>
+                                <?php echo $studentrow->num_rows  ?>
+                            </div>
                             <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">
                                 Students &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
@@ -263,40 +271,40 @@ include('includes/topbar.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                                $nextweek = date("Y-m-d", strtotime("+1 week"));
-                                                $sqlmain = "select appointment.appoid,schedule.scheduleid,schedule.title,counsellor.counname,student.stuname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today'  and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
+                                        <?php
+                                        $nextweek = date("Y-m-d", strtotime("+1 week"));
+                                        $sqlmain = "select appointment.appoid,schedule.scheduleid,schedule.title,counsellor.counname,student.stuname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today'  and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
 
-                                                $result = $database->query($sqlmain);
+                                        $result = $database->query($sqlmain);
 
-                                                if ($result->num_rows == 0) {
-                                                    echo '<tr>
+                                        if ($result->num_rows == 0) {
+                                            echo '<tr>
                                                     <td colspan="3">
                                                     <br><br><br><br>
                                                     <center>
                                                     <img src="../img/notfound.svg" width="25%">
                                                     
                                                     <br>
-                                                    <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">We  couldnt find anything related to your keywords !</p>
-                                                    <a class="non-style-link" href="appointment.php"><button  class="login-btn btn-primary-soft btn"  style="display: flex;justify-content: center;align-items: center;margin-left:20px;">&nbsp; Show all Appointments &nbsp;</font></button>
+                                                    <p class="heading-main12" style="margin-left: 45px;font-size:20px;color:rgb(49, 49, 49)">We  couldn\'t find anything related to your keywords !</p>
+                                                    <a class="non-style-link" href="appointments.php"><button  class="login-btn btn-primary-soft btn"  style="display: flex;justify-content: center;align-items: center;margin-left:20px;">&nbsp; Show all Appointments &nbsp;</font></button>
                                                     </a>
                                                     </center>
                                                     <br><br><br><br>
                                                     </td>
                                                     </tr>';
-                                                } else {
-                                                    for ($x = 0; $x < $result->num_rows; $x++) {
-                                                        $row = $result->fetch_assoc();
-                                                        $appoid = $row["appoid"];
-                                                        $scheduleid = $row["scheduleid"];
-                                                        $title = $row["title"];
-                                                        $counname = $row["counname"];
-                                                        $scheduledate = $row["scheduledate"];
-                                                        $scheduletime = $row["scheduletime"];
-                                                        $stuname = $row["stuname"];
-                                                        $apponum = $row["apponum"];
-                                                        $appodate = $row["appodate"];
-                                                        echo '<tr>
+                                        } else {
+                                            for ($x = 0; $x < $result->num_rows; $x++) {
+                                                $row = $result->fetch_assoc();
+                                                $appoid = $row["appoid"];
+                                                $scheduleid = $row["scheduleid"];
+                                                $title = $row["title"];
+                                                $counname = $row["counname"];
+                                                $scheduledate = $row["scheduledate"];
+                                                $scheduletime = $row["scheduletime"];
+                                                $stuname = $row["stuname"];
+                                                $apponum = $row["apponum"];
+                                                $appodate = $row["appodate"];
+                                                echo '<tr>
 
 
                                                         <td style="text-align:center;font-size:23px;font-weight:500; color: var(--btnnicetext);padding:20px;">
@@ -306,12 +314,12 @@ include('includes/topbar.php');
 
                                                         <td style="font-weight:600;"> &nbsp;' .
 
-                                                            substr($stuname, 0, 25)
-                                                            . '</td >
+                                                    substr($stuname, 0, 25)
+                                                    . '</td >
                                                         <td style="font-weight:600;"> &nbsp;' .
 
-                                                            substr($counname, 0, 25)
-                                                            . '</td >
+                                                    substr($counname, 0, 25)
+                                                    . '</td >
                                                            
                                                         
                                                         <td>
@@ -319,17 +327,19 @@ include('includes/topbar.php');
                                                         </td>
 
                                                     </tr>';
-                                                    }
-                                                }
+                                            }
+                                        }
 
-                                                ?>
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-primary btn-block" type="button">Show all Appointments</button>
+                        <a href="appointments.php" class="non-style-link">
+                            <button class="btn btn-primary btn-block" type="button">Show all Appointments</button>
+                        </a>
                     </div>
 
 
@@ -360,13 +370,13 @@ include('includes/topbar.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                                $nextweek = date("Y-m-d", strtotime("+1 week"));
-                                                $sqlmain = "select schedule.scheduleid,schedule.title,counsellor.counname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today' and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
-                                                $result = $database->query($sqlmain);
+                                        <?php
+                                        $nextweek = date("Y-m-d", strtotime("+1 week"));
+                                        $sqlmain = "select schedule.scheduleid,schedule.title,counsellor.counname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today' and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
+                                        $result = $database->query($sqlmain);
 
-                                                if ($result->num_rows == 0) {
-                                                    echo '<tr>
+                                        if ($result->num_rows == 0) {
+                                            echo '<tr>
                                                     <td colspan="4">
                                                     <br><br><br><br>
                                                     <center>
@@ -380,19 +390,19 @@ include('includes/topbar.php');
                                                     <br><br><br><br>
                                                     </td>
                                                     </tr>';
-                                                } else {
-                                                    for ($x = 0; $x < $result->num_rows; $x++) {
-                                                        $row = $result->fetch_assoc();
-                                                        $scheduleid = $row["scheduleid"];
-                                                        $title = $row["title"];
-                                                        $counname = $row["counname"];
-                                                        $scheduledate = $row["scheduledate"];
-                                                        $scheduletime = $row["scheduletime"];
-                                                        $nop = $row["nop"];
-                                                        echo '<tr>
+                                        } else {
+                                            for ($x = 0; $x < $result->num_rows; $x++) {
+                                                $row = $result->fetch_assoc();
+                                                $scheduleid = $row["scheduleid"];
+                                                $title = $row["title"];
+                                                $counname = $row["counname"];
+                                                $scheduledate = $row["scheduledate"];
+                                                $scheduletime = $row["scheduletime"];
+                                                $nop = $row["nop"];
+                                                echo '<tr>
                                                         <td style="padding:20px;"> &nbsp;' .
-                                                            substr($title, 0, 30)
-                                                            . '</td>
+                                                    substr($title, 0, 30)
+                                                    . '</td>
                                                         <td>
                                                         ' . substr($counname, 0, 20) . '
                                                         </td>
@@ -403,17 +413,19 @@ include('includes/topbar.php');
                 
                                                        
                                                     </tr>';
-                                                    }
-                                                }
+                                            }
+                                        }
 
-                                                ?>
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-primary btn-block" type="button">Show all Sessions</button>
+                        <a href="schedule.php" class="non-style-link">
+                            <button class="btn btn-primary btn-block" type="button">Show all Sessions</button>
+                        </a>
                     </div>
 
                     <!-- Color System -->
