@@ -3,172 +3,407 @@ include('includes/navbar.php');
 include('includes/topbar.php');
 ?>
 
-<div class="modal fade" id="essien" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Edit User Account Details.</h5>
-                <p>User ID : 3 (Auto Generated)</p>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="add-new.php" method="POST">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1" class="text-gray-900">Email:</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Counsellor's Name" name="name" value="stephenymensah@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" class="text-gray-900">Name:</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Email Address"
-                        value="Stephen Essien Mensah" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" class="text-gray-900">Staff ID:</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="ID Number" name="staffid"
-                        value="10829102">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" class="text-gray-900">Telephone:</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telephone Number" name="tel"
-                        value="0553053239">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" class="text-gray-900">Password:</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Define a Password" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1" class="text-gray-900">Conform Password:</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Conform Password" name="cpassword">
-                    </div>
-                    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Reset</button>
-                <button type="button" class="btn btn-primary" name="addbtn">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="essien1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">View Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p class="mb-1">Name:</p>
-                <p>Stephen Essien</p>
-                <p class="mb-1">Email:</p>
-                <p>stephenyessien@gmail.com</p>
-                <p class="mb-1">Staff ID number:</p>
-                <p>10829102</p>
-                <p class="mb-1">Telephone:</p>
-                <p>0553053239</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Reset</button>
-                <button type="button" class="btn btn-primary" name="addbtn">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+
 
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4 gap-4">
         <button class="btn btn-primary" type="button">
             < Back </button>
                 <h5 class="font-weight-bold mb-0 text-gray-800">Settings</h5>
-                <p>Today's Date</p>
+                <p>
+                    <?php
+                    date_default_timezone_set('Asia/Kolkata');
+
+                    $today = date('Y-m-d');
+                    echo $today;
+
+
+                    $studentrow = $database->query("select * from  student;");
+                    $counsellorrow = $database->query("select * from  counsellor;");
+                    $appointmentrow = $database->query("select * from  appointment where appodate>='$today';");
+                    $schedulerow = $database->query("select * from  schedule where scheduledate='$today';");
+
+
+                    ?>
+                </p>
     </div>
-    <div class="mb-3">
-        <div class="mb-3">
-            <div class="container">
-                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#essien" style="width: 100%; height: 8rem; ">
-                    <div class="text-left" style="display:flex; gap:1rem">
-                        <div style="background: gray; width:5rem; height: 70px;"></div>
-                        <div>
-                            <h3>Account Settings</h3>
-                            <p>Edit your Account Details & Change Password</p>
-                        </div>
-                    </div>
-                </button>
-            </div>
-        </div>
-        <div class="mb-3">
-            <div class="">
-                <div class="container">
-                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#essien1" style="width: 100%; height: 8rem">
-                        <div class="text-left" style="display:flex; gap:1rem">
-                            <div style="background: gray; width:5rem; height: 70px;"></div>
+    <div>
+        <table class="filter-container" style="border: none;" border="0">
+            <tr>
+                <td colspan="4">
+                    <p style="font-size: 20px">&nbsp;</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 25%;">
+                    <a href="?action=edit&id=<?php echo $userid ?>&error=0" class="non-style-link">
+                        <div class="dashboard-items setting-tabs" style="padding:20px;margin:auto;width:95%;display: flex">
+                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/icons/doctors-hover.svg');"></div>
                             <div>
-                                <h3>View Account Details</h3>
-                                <p>View Personal information About Your Account</p>
+                                <div class="h1-dashboard" style="font-size: 20px;">
+                                    Account Settings &nbsp;
+
+                                </div><br>
+                                <div class="h3-dashboard" style="font-size: 15px;">
+                                    Edit your Account Details & Change Password
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mb-3">
-        <div class="">
-            <div class="container">
-                <button type="button" class="btn btn-outline-secondary" style="width: 100%; height: 8rem">
-                    <div class="text-left" style="display:flex; gap:1rem">
-                        <div style="background: gray; width:5rem; height: 70px;"></div>
-                        <div>
-                            <h3>Delete Account</h3>
-                            <p>Will Permanently Remove your Account</p>
-                        </div>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </div>
-    <!-- <div class="card-header py-3">
-            <h5 class="mb-0 font-weight-bold text-gray-800">All Students</h5>
-        </div>
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="h5 mb-0 font-weight-bold text-primary">
-                        2</div>
-                    <div class="h5 font-weight-bold text-gray-900 mb-1">Today <br> Session</div>
-                </div>
-                <div class="col-auto">
-                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="card shadow mb-1 ">
+                        </div>
+                    </a>
+                </td>
 
-        <div class="card-body table-responsive">
-            <div class="table-responsive">
-                <table class="table table-borderless text-gray-900">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Student ID Number</th>
-                            <th scope="col">Telephone</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Date of Birth</th>
-                            <th scope="col">Events</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div> -->
+
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <p style="font-size: 5px">&nbsp;</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 25%;">
+                    <a href="?action=view&id=<?php echo $userid ?>" class="non-style-link">
+                        <div class="dashboard-items setting-tabs" style="padding:20px;margin:auto;width:95%;display: flex;">
+                            <div class="btn-icon-back dashboard-icons-setting " style="background-image: url('../img/icons/view-iceblue.svg');"></div>
+                            <div>
+                                <div class="h1-dashboard" style="font-size: 22.8px;">
+                                    View Account Details
+
+                                </div><br>
+                                <div class="h3-dashboard" style="font-size: 15px;">
+                                    View Personal information About Your Account
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <p style="font-size: 5px">&nbsp;</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 25%;">
+                    <a href="?action=drop&id=<?php echo $userid . '&name=' . $username ?>" class="non-style-link">
+                        <div class="dashboard-items setting-tabs" style="padding:20px;margin:auto;width:95%;display: flex;">
+                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/icons/patients-hover.svg');"></div>
+                            <div>
+                                <div class="h1-dashboard" style="color: #ff5050; font-size: 22.8px;">
+                                    Delete Account
+
+                                </div><br>
+                                <div class="h3-dashboard" style="font-size: 15px;">
+                                    Will Permanently Remove your Account
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                </td>
+
+            </tr>
+        </table>
+    </div>
 </div>
+<?php
+if ($_GET) {
+
+    $id = $_GET["id"];
+    $action = $_GET["action"];
+    if ($action == 'drop') {
+        $nameget = $_GET["name"];
+        echo '
+            <div id="popup1" class="overlay">
+                    <div class="popup">
+                    <center>
+                        <h2>Are you sure?</h2>
+                        <a class="close" href="setting.php">&times;</a>
+                        <div class="content">
+                            You want to delete Your Account<br>(' . substr($nameget, 0, 40) . ').
+                            
+                        </div>
+                        <div style="display: flex;justify-content: center;">
+                        <a href="delete-account.php?id=' . $id . '" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"<font class="tn-in-text">&nbsp;Yes&nbsp;</font></button></a>&nbsp;&nbsp;&nbsp;
+                        <a href="setting.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;No&nbsp;&nbsp;</font></button></a>
+
+                        </div>
+                    </center>
+            </div>
+            </div>
+            ';
+    } elseif ($action == 'view') {
+        $sqlmain = "select * from student where stuid=?";
+        $stmt = $database->prepare($sqlmain);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $name = $row["stuname"];
+        $email = $row["stuemail"];
+
+
+
+        $dob = $row["studob"];
+        $idnum = $row['studidnum'];
+        $tele = $row['stutel'];
+        echo '
+            <div id="popup1" class="overlay">
+                    <div class="popup">
+                    <center>
+                        <h2></h2>
+                        <a class="close" href="setting.php">&times;</a>
+                        <div class="content">
+                            Web App<br>
+                            
+                        </div>
+                        <div style="display: flex;justify-content: center;">
+                        <div class="abc">
+                        <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
+                        
+                            <tr>
+                                <td>
+                                    <p style="padding: 0;margin-bottom: 5;text-align: left;font-size: 25px;font-weight: 500;">View Details.</p>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                
+                                <td class="label-td" colspan="2">
+                                    <label for="name" class="form-label">Name: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    ' . $name . '<br><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="Email" class="form-label">Email: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                ' . $email . '<br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="studidnum" class="form-label">ID Number: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                ' . $idnum . '<br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="Tele" class="form-label">Telephone: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                ' . $tele . '<br><br>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="spec" class="form-label">Date of Birth: </label>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                            <td class="label-td" colspan="2">
+                            ' . $dob . '<br><br>
+                            </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="setting.php"><input type="button" value="OK" class="login-btn btn-primary-soft btn" ></a>
+                                
+                                    
+                                </td>
+                
+                            </tr>
+                           
+
+                        </table>
+                        </div>
+                        </div>
+                    </center>
+                    <br><br>
+            </div>
+            </div>
+            ';
+    } elseif ($action == 'edit') {
+        $sqlmain = "select * from student where stuid=?";
+        $stmt = $database->prepare($sqlmain);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $name = $row["stuname"];
+        $email = $row["stuemail"];
+
+
+
+
+        $idnum = $row['studidnum'];
+        $tele = $row['stutel'];
+
+        $error_1 = $_GET["error"];
+        $errorlist = array(
+            '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
+            '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconform Password</label>',
+            '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
+            '4' => "",
+            '0' => '',
+
+        );
+
+        if ($error_1 != '4') {
+            echo '
+                    <div id="popup1" class="overlay">
+                            <div class="popup">
+                            <center>
+                            
+                                <a class="close" href="setting.php">&times;</a> 
+                                <div style="display: flex;justify-content: center;">
+                                <div class="abc">
+                                <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
+                                <tr>
+                                        <td class="label-td" colspan="2">' .
+                $errorlist[$error_1]
+                . '</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">Edit User Account Details.</p>
+                                        User ID : ' . $id . ' (Auto Generated)<br><br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <form action="edit-user.php" method="POST" class="add-new-form">
+                                            <label for="Email" class="form-label">Email: </label>
+                                            <input type="hidden" value="' . $id . '" name="id00">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                        <input type="hidden" name="oldemail" value="' . $email . '" >
+                                        <input type="email" name="email" class="input-text" placeholder="Email Address" value="' . $email . '" required><br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td class="label-td" colspan="2">
+                                            <label for="name" class="form-label">Name: </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <input type="text" name="name" class="input-text" placeholder="Doctor Name" value="' . $name . '" required><br>
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <label for="studidnum" class="form-label">ID Number: </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <input type="text" name="studidnum" class="input-text" placeholder="ID Number" value="' . $idnum . '" required><br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <label for="Tele" class="form-label">Telephone: </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="' . $tele . '" required><br>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <label for="password" class="form-label">Password: </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <input type="password" name="password" class="input-text" placeholder="Defind a Password" required><br>
+                                        </td>
+                                    </tr><tr>
+                                        <td class="label-td" colspan="2">
+                                            <label for="cpassword" class="form-label">Conform Password: </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-td" colspan="2">
+                                            <input type="password" name="cpassword" class="input-text" placeholder="Conform Password" required><br>
+                                        </td>
+                                    </tr>
+                                    
+                        
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="reset" value="Reset" class="login-btn btn-primary-soft btn" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        
+                                            <input type="submit" value="Save" class="login-btn btn-primary btn">
+                                        </td>
+                        
+                                    </tr>
+                                
+                                    </form>
+                                    </tr>
+                                </table>
+                                </div>
+                                </div>
+                            </center>
+                            <br><br>
+                    </div>
+                    </div>
+                    ';
+        } else {
+            echo '
+                <div id="popup1" class="overlay">
+                        <div class="popup">
+                        <center>
+                        <br><br><br><br>
+                            <h2>Edit Successfully!</h2>
+                            <a class="close" href="setting.php">&times;</a>
+                            <div class="content">
+                                If You change your email also Please logout and login again with your new email
+                                
+                            </div>
+                            <div style="display: flex;justify-content: center;">
+                            
+                            <a href="setting.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;OK&nbsp;&nbsp;</font></button></a>
+                            <a href="../logout.php" class="non-style-link"><button  class="btn-primary-soft btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;Log out&nbsp;&nbsp;</font></button></a>
+
+                            </div>
+                            <br><br>
+                        </center>
+                </div>
+                </div>
+    ';
+        };
+    }
+}
+?>
 
 
 <?php

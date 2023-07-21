@@ -9,20 +9,19 @@
 
     }else{
         header("location: ../login.php");
-    }
-    
+    }    
     
     if($_GET){
-        //import database
+
         include("../connection.php");
         $id=$_GET["id"];
         $result001= $database->query("select * from counsellor where counid=$id;");
-        $email=($result001->fetch_assoc())["docemail"];
+        $email=($result001->fetch_assoc())["counemail"];
         $sql= $database->query("delete from webuser where email='$email';");
         $sql= $database->query("delete from counsellor where counemail='$email';");
-        //print_r($email);
+
         header("location: ../index.php");
     }
 
 
-?>
+    

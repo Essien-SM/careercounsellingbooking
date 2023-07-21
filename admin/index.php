@@ -8,10 +8,10 @@ include('includes/topbar.php');
 <div class="container-fluid">
     <!-- Sidebar Toggle (Topbar) -->
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-3 gap-4">
+    <div class="d-sm-flex align-items-center justify-content-between mb-3">
         <form action="counsellor.php" method="post">
-            <div class="" style="display:flex; flex-direction:row; margin:auto;">
-                <input class="form-control" type="search" name="search" aria-label="default input example" style="width: 20rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
+            <div class="" style="display:flex;">
+                <input class="form-control input-text header-searchbar" type="search" name="search" aria-label="default input example" style="width: 20rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
 
                 <?php
                         echo '<datalist id="counsellors">';
@@ -28,9 +28,7 @@ include('includes/topbar.php');
                         echo ' </datalist>';
                         ?>
 
-                <button type="submit" class="btn btn-primary">
-                    Search
-                </button>
+                <input type="submit" class="login-btn btn-primary-soft btn" >
             </div>
         </form>
         <div>

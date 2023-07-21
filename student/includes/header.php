@@ -18,6 +18,9 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/main.css">
+
     <style>
         .popup {
             animation: transitionIn-Y-bottom 0.5s;
