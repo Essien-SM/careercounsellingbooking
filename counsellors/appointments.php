@@ -10,18 +10,26 @@ include('includes/topbar.php');
         <button class="btn btn-primary" type="button">
             < Back </button>
                 <h5 class="font-weight-bold mb-0 text-gray-800">Appointment Manager</h5>
-                <p>
-                    <?php
+                <div class="d-flex">
+                    <div class="d-flex flex-column">
+                        Today's Date:
+                        <p class="text-center text-gray-900 h3">
+                            <?php
 
-                    date_default_timezone_set('Asia/Kolkata');
+                            date_default_timezone_set('Asia/Kolkata');
 
-                    $today = date('Y-m-d');
-                    echo $today;
+                            $today = date('Y-m-d');
+                            echo $today;
 
-                    $list110 = $database->query("select * from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid  where  counsellor.counid=$userid ");
+                            $list110 = $database->query("select * from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid  where  counsellor.counid=$userid ");
 
-                    ?>
-                </p>
+                            ?>
+                        </p>
+                    </div>
+                    <div>
+                        <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+                    </div>
+                </div>
     </div>
     <div class="card shadow mb-2">
         <div class="card-header py-3">

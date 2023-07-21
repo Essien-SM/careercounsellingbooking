@@ -8,22 +8,31 @@ include('includes/topbar.php');
     <!-- Page Heading -->
     <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Home</h1>
-        <p class="text-center">
-            <?php
-            date_default_timezone_set('Asia/Kolkata');
 
-            $today = date('Y-m-d');
-            echo $today;
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h3">
+                    <?php
+                    date_default_timezone_set('Asia/Kolkata');
 
-
-            $studentrow = $database->query("select  * from  student;");
-            $counsellorrow = $database->query("select  * from  counsellor;");
-            $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
-            $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
+                    $today = date('Y-m-d');
+                    echo $today;
 
 
-            ?>
-        </p>
+                    $studentrow = $database->query("select  * from  student;");
+                    $counsellorrow = $database->query("select  * from  counsellor;");
+                    $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
+                    $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
+
+
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
 
     <!-- Content Row -->

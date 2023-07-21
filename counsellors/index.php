@@ -8,22 +8,30 @@ include('includes/topbar.php');
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <p class=" text-center">
-            <?php
-            date_default_timezone_set('Asia/Kolkata');
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class=" text-center text-gray-900 h3">
+                    <?php
+                    date_default_timezone_set('Asia/Kolkata');
 
-            $today = date('Y-m-d');
-            echo $today;
-
-
-            $studentrow = $database->query("select  * from  student;");
-            $counsellorrow = $database->query("select  * from  counsellor;");
-            $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
-            $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
+                    $today = date('Y-m-d');
+                    echo $today;
 
 
-            ?>
-        </p>
+                    $studentrow = $database->query("select  * from  student;");
+                    $counsellorrow = $database->query("select  * from  counsellor;");
+                    $appointmentrow = $database->query("select  * from  appointment where appodate>='$today';");
+                    $schedulerow = $database->query("select  * from  schedule where scheduledate='$today';");
+
+
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
 
     <!-- Content Row -->
@@ -55,13 +63,13 @@ include('includes/topbar.php');
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                            <?php echo $counsellorrow->num_rows  ?></div>
+                                                <?php echo $counsellorrow->num_rows  ?></div>
                                             <div class="h5 font-weight-bold text-gray-900 mb-1">
                                                 All <br> Counsellors &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <p>icon</p>
                                         </div>
                                     </div>
                                 </div>
@@ -73,13 +81,13 @@ include('includes/topbar.php');
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                            <?php echo $studentrow->num_rows  ?></div>
+                                                <?php echo $studentrow->num_rows  ?></div>
                                             <div class="h5 font-weight-bold text-gray-900 mb-1">
                                                 All <br> student &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <p>icon</p>
                                         </div>
                                     </div>
                                 </div>
@@ -91,13 +99,13 @@ include('includes/topbar.php');
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                            <?php echo $appointmentrow ->num_rows  ?></div>
+                                                <?php echo $appointmentrow->num_rows  ?></div>
                                             <div class="h5 font-weight-bold text-gray-900 mb-1">
                                                 New <br> Booking &nbsp;&nbsp;
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <p>icon</p>
                                         </div>
                                     </div>
                                 </div>
@@ -109,13 +117,13 @@ include('includes/topbar.php');
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-primary">
-                                            <?php echo $schedulerow ->num_rows  ?></div>
+                                                <?php echo $schedulerow->num_rows  ?></div>
                                             <div class="h5 font-weight-bold text-gray-900 mb-1">
                                                 Today <br> Session
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <p>icon</p>
                                         </div>
                                     </div>
                                 </div>
@@ -141,13 +149,13 @@ include('includes/topbar.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                            $nextweek=date("Y-m-d",strtotime("+1 week"));
-                                            $sqlmain= "select schedule.scheduleid,schedule.title,counsellor.counname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today' and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc"; 
-                                                $result= $database->query($sqlmain);
-                
-                                                if($result->num_rows==0){
-                                                    echo '<tr>
+                                        <?php
+                                        $nextweek = date("Y-m-d", strtotime("+1 week"));
+                                        $sqlmain = "select schedule.scheduleid,schedule.title,counsellor.counname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join counsellor on schedule.counid=counsellor.counid  where schedule.scheduledate>='$today' and schedule.scheduledate<='$nextweek' order by schedule.scheduledate desc";
+                                        $result = $database->query($sqlmain);
+
+                                        if ($result->num_rows == 0) {
+                                            echo '<tr>
                                                     <td colspan="4">
                                                     <br><br><br><br>
                                                     <center>
@@ -161,36 +169,33 @@ include('includes/topbar.php');
                                                     <br><br><br><br>
                                                     </td>
                                                     </tr>';
-                                                    
-                                                }
-                                                else{
-                                                for ( $x=0; $x<$result->num_rows;$x++){
-                                                    $row=$result->fetch_assoc();
-                                                    $scheduleid=$row["scheduleid"];
-                                                    $title=$row["title"];
-                                                    $counname=$row["counname"];
-                                                    $scheduledate=$row["scheduledate"];
-                                                    $scheduletime=$row["scheduletime"];
-                                                    $nop=$row["nop"];
-                                                    echo '<tr>
-                                                        <td style="padding:20px;"> &nbsp;'.
-                                                        substr($title,0,30)
-                                                        .'</td>
+                                        } else {
+                                            for ($x = 0; $x < $result->num_rows; $x++) {
+                                                $row = $result->fetch_assoc();
+                                                $scheduleid = $row["scheduleid"];
+                                                $title = $row["title"];
+                                                $counname = $row["counname"];
+                                                $scheduledate = $row["scheduledate"];
+                                                $scheduletime = $row["scheduletime"];
+                                                $nop = $row["nop"];
+                                                echo '<tr>
+                                                        <td style="padding:20px;"> &nbsp;' .
+                                                    substr($title, 0, 30)
+                                                    . '</td>
                                                         <td style="padding:20px;font-size:13px;">
-                                                        '.substr($scheduledate,0,10).'
+                                                        ' . substr($scheduledate, 0, 10) . '
                                                         </td>
                                                         <td style="text-align:center;">
-                                                            '.substr($scheduletime,0,5).'
+                                                            ' . substr($scheduletime, 0, 5) . '
                                                         </td>
 
                 
                                                        
                                                     </tr>';
-                                                    
-                                                }
                                             }
-                                                 
-                                            ?>
+                                        }
+
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

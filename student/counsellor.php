@@ -3,12 +3,12 @@ include('includes/navbar.php');
 include('includes/topbar.php');
 ?>
 
-<?php 
- 
+<?php
+
 $userrow = $database->query("select * from student where stuemail='$useremail'");
-$userfetch=$userrow->fetch_assoc();
-$userid= $userfetch["stuid"];
-$username=$userfetch["stuname"];
+$userfetch = $userrow->fetch_assoc();
+$userid = $userfetch["stuid"];
+$username = $userfetch["stuname"];
 
 ?>
 
@@ -19,30 +19,33 @@ $username=$userfetch["stuname"];
     <!-- Page Heading -->
     <div style="margin-top: 100px;" class="d-sm-flex align-items-center justify-content-between mb-3 gap-4">
         <a href="counsellor.php"><button class="h3 mb-2 btn btn-primary" type="button">
-            < Back </button></a>
-                <form action="" method="post">
-                    <div class="" style="display:flex; flex-direction:row; margin:auto;">
-                        <input class="form-control" type="search" name="search" aria-label="default input example" style="width: 20rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
-                        <?php
-                        echo '<datalist id="counsellors">';
-                        $list11 = $database->query("select counname,counemail from counsellor;");
+                < Back </button></a>
+        <form action="" method="post">
+            <div class="" style="display:flex; flex-direction:row; margin:auto;">
+                <input class="form-control" type="search" name="search" aria-label="default input example" style="width: 20rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
+                <?php
+                echo '<datalist id="counsellors">';
+                $list11 = $database->query("select counname,counemail from counsellor;");
 
-                        for ($y = 0; $y < $list11->num_rows; $y++) {
-                            $row00 = $list11->fetch_assoc();
-                            $d = $row00["counname"];
-                            $c = $row00["counemail"];
-                            echo "<option value='$d'><br/>";
-                            echo "<option value='$c'><br/>";
-                        };
+                for ($y = 0; $y < $list11->num_rows; $y++) {
+                    $row00 = $list11->fetch_assoc();
+                    $d = $row00["counname"];
+                    $c = $row00["counemail"];
+                    echo "<option value='$d'><br/>";
+                    echo "<option value='$c'><br/>";
+                };
 
-                        echo ' </datalist>';
-                        ?>
-                        <button type="Submit" class="btn btn-primary">
-                            Search
-                        </button>
-                    </div>
-                </form>
-                <p class="text-center">
+                echo ' </datalist>';
+                ?>
+                <button type="Submit" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+        </form>
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h3">
                     <?php
                     date_default_timezone_set('Asia/Kolkata');
 
@@ -50,6 +53,11 @@ $username=$userfetch["stuname"];
                     echo $date;
                     ?>
                 </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
 
     <div class="card shadow mb-2">
@@ -306,41 +314,41 @@ $username=$userfetch["stuname"];
             </div>
             ';
             }
-        } elseif($action=='edit'){
-            $sqlmain= "select * from counsellor where counid=?";
+        } elseif ($action == 'edit') {
+            $sqlmain = "select * from counsellor where counid=?";
             $stmt = $database->prepare($sqlmain);
-            $stmt->bind_param("i",$id);
+            $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
-            $row=$result->fetch_assoc();
-       
-            $name=$row["counname"];
-            $email=$row["counemail"];
-            $spe=$row["specialties"];
-            
-            $sqlmain= "select sname from specialties where id='?";
+            $row = $result->fetch_assoc();
+
+            $name = $row["counname"];
+            $email = $row["counemail"];
+            $spe = $row["specialties"];
+
+            $sqlmain = "select sname from specialties where id='?";
             $stmt = $database->prepare($sqlmain);
-            $stmt->bind_param("s",$spe);
+            $stmt->bind_param("s", $spe);
             $stmt->execute();
             $result = $stmt->get_result();
 
-            $spcil_array= $spcil_res->fetch_assoc();
-            $spcil_name=$spcil_array["sname"];
-            $idnum=$row['counidnum'];
-            $tele=$row['countel'];
+            $spcil_array = $spcil_res->fetch_assoc();
+            $spcil_name = $spcil_array["sname"];
+            $idnum = $row['counidnum'];
+            $tele = $row['countel'];
 
-            $error_1=$_GET["error"];
-                $errorlist= array(
-                    '1'=>'<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
-                    '2'=>'<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
-                    '3'=>'<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
-                    '4'=>"",
-                    '0'=>'',
+            $error_1 = $_GET["error"];
+            $errorlist = array(
+                '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
+                '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
+                '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
+                '4' => "",
+                '0' => '',
 
-                );
+            );
 
-            if($error_1!='4'){
-                    echo '
+            if ($error_1 != '4') {
+                echo '
                     <div id="popup1" class="overlay">
                             <div class="popup">
                             <center>
@@ -350,26 +358,26 @@ $username=$userfetch["stuname"];
                                 <div class="abc">
                                 <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
                                 <tr>
-                                        <td class="label-td" colspan="2">'.
-                                            $errorlist[$error_1]
-                                        .'</td>
+                                        <td class="label-td" colspan="2">' .
+                    $errorlist[$error_1]
+                    . '</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">Edit Counsellor Details.</p>
-                                        Counsellor ID : '.$id.' (Auto Generated)<br><br>
+                                        Counsellor ID : ' . $id . ' (Auto Generated)<br><br>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
                                             <form action="edit-coun.php" method="POST" class="add-new-form">
                                             <label for="Email" class="form-label">Email: </label>
-                                            <input type="hidden" value="'.$id.'" name="id00">
+                                            <input type="hidden" value="' . $id . '" name="id00">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                        <input type="email" name="email" class="input-text" placeholder="Email Address" value="'.$email.'" required><br>
+                                        <input type="email" name="email" class="input-text" placeholder="Email Address" value="' . $email . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -380,7 +388,7 @@ $username=$userfetch["stuname"];
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="name" class="input-text" placeholder="Counsellor Name" value="'.$name.'" required><br>
+                                            <input type="text" name="name" class="input-text" placeholder="Counsellor Name" value="' . $name . '" required><br>
                                         </td>
                                         
                                     </tr>
@@ -392,7 +400,7 @@ $username=$userfetch["stuname"];
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="counidnum" class="input-text" placeholder="ID Number" value="'.$idnum.'" required><br>
+                                            <input type="text" name="counidnum" class="input-text" placeholder="ID Number" value="' . $idnum . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -402,33 +410,33 @@ $username=$userfetch["stuname"];
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="'.$tele.'" required><br>
+                                            <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="' . $tele . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="spec" class="form-label">Choose specialties: (Current'.$spcil_name.')</label>
+                                            <label for="spec" class="form-label">Choose specialties: (Current' . $spcil_name . ')</label>
                                             
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
                                             <select name="spec" id="" class="box">';
-                                                
-                
-                                                $list11 = $database->query("select  * from  specialties;");
-                
-                                                for ($y=0;$y<$list11->num_rows;$y++){
-                                                    $row00=$list11->fetch_assoc();
-                                                    $sn=$row00["sname"];
-                                                    $id00=$row00["id"];
-                                                    echo "<option value=".$id00.">$sn</option><br/>";
-                                                };
-                
-                
-                
-                                                
-                                echo     '       </select><br><br>
+
+
+                $list11 = $database->query("select  * from  specialties;");
+
+                for ($y = 0; $y < $list11->num_rows; $y++) {
+                    $row00 = $list11->fetch_assoc();
+                    $sn = $row00["sname"];
+                    $id00 = $row00["id"];
+                    echo "<option value=" . $id00 . ">$sn</option><br/>";
+                };
+
+
+
+
+                echo     '       </select><br><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -471,8 +479,8 @@ $username=$userfetch["stuname"];
                     </div>
                     </div>
                     ';
-        }else{
-            echo '
+            } else {
+                echo '
                 <div id="popup1" class="overlay">
                         <div class="popup">
                         <center>
@@ -493,13 +501,10 @@ $username=$userfetch["stuname"];
                 </div>
                 </div>
     ';
+            };
+        };
 
-
-
-        }; 
-    };
-
-?>
+        ?>
     </div>
 
 

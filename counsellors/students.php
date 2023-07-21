@@ -66,14 +66,22 @@ if ($_POST) {
                 </button>
             </div>
         </form>
-        <p class="text-center">
-            <?php
-            date_default_timezone_set('Asia/Kolkata');
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h3">
+                    <?php
+                    date_default_timezone_set('Asia/Kolkata');
 
-            $date = date('Y-m-d');
-            echo $date;
-            ?>
-        </p>
+                    $date = date('Y-m-d');
+                    echo $date;
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
     <div class="card shadow mb-1 ">
         <div class="card-header py-3">

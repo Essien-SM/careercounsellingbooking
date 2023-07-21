@@ -42,7 +42,7 @@ $result = $database->query($sqlmain)
 
 
 
-<div class="container-fluid">    <!-- Page Heading -->
+<div class="container-fluid"> <!-- Page Heading -->
     <div style="margin-top: 100px;" class="d-sm-flex align-items-center justify-content-between mb-4 gap-4">
         <a href="counsellor.php"> <button class="btn btn-primary" type="button">
                 < Back </button></a>
@@ -81,16 +81,25 @@ $result = $database->query($sqlmain)
                 </button>
             </div>
         </form>
-        <p>
-            <?php
+
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h3 ">
+                    <?php
 
 
-            echo $today;
+                    echo $today;
 
 
 
-            ?>
-        </p>
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
     <div class="card mb-2">
         <div class="card-header py-3">
