@@ -85,7 +85,7 @@ $result = $database->query($sqlmain)
         <div class="d-flex">
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class="text-center text-gray-900 h3 ">
+                <p class="text-center text-gray-900 h5 ">
                     <?php
 
 

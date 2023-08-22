@@ -38,7 +38,7 @@ if ($_POST) {
 
 <div class="container-fluid">
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4">
         <a href="index.php">
             <button class="h3 mb-2 btn btn-primary" type="button">
                 < Back </button>
@@ -69,7 +69,7 @@ if ($_POST) {
         <div class="d-flex">
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class="text-center text-gray-900 h3">
+                <p class="text-center text-gray-900 h5">
                     <?php
                     date_default_timezone_set('Asia/Kolkata');
 

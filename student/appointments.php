@@ -4,7 +4,17 @@ include('includes/topbar.php');
 ?>
 
 <?php
-$sqlmain = "select appointment.appoid,schedule.scheduleid,schedule.title,counsellor.counname,student.stuname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid  where  student.stuid=$userid ";
+
+$sqlm= "select * from student where stuemail=?";
+    $stmt = $database->prepare($sqlm);
+    $stmt->bind_param("s",$useremail);
+    $stmt->execute();
+    $userrow = $stmt->get_result();
+    $userfetch=$userrow->fetch_assoc();
+    $userid= $userfetch["stuid"];
+    $username=$userfetch["stuname"];
+
+$sqlm = "select appointment.appoid,schedule.scheduleid,schedule.title,counsellor.counname,student.stuname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid  where  student.stuid=$userid ";
 
 if ($_POST) {
     //print_r($_POST);
@@ -14,25 +24,25 @@ if ($_POST) {
 
     if (!empty($_POST["scheduledate"])) {
         $scheduledate = $_POST["scheduledate"];
-        $sqlmain .= " and schedule.scheduledate='$scheduledate' ";
+        $sqlm .= " and schedule.scheduledate='$scheduledate' ";
     };
 
 
 
-    //echo $sqlmain;
+    
 
 }
 
-$sqlmain .= "order by appointment.appodate  asc";
-$result = $database->query($sqlmain);
+$sqlm.= "order by appointment.appodate  asc";
+$result = $database->query($sqlm);
 ?>
 
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4 gap-4">
-        <button class="btn btn-primary" type="button">
-            < Back </button>
+        <a href="appointments.php"><button class="btn btn-primary" type="button">
+            < Back </button></a>
                 <h5 class="font-weight-bold mb-0 text-gray-800">My Booking History</h5>
                 <p>
                     <?php
@@ -198,9 +208,13 @@ $result = $database->query($sqlmain);
         </div>
 
         <?php
-        if($_GET){
-        $id=$_GET["id"];
+
+        if(isset($_POST["action"])){
+            $action=$_POST["action"];
+        }
+        else if(isset($_GET["action"])){
         $action=$_GET["action"];
+        $id=$_GET["id"];
         if($action=='booking-added'){
             
             echo '
@@ -249,8 +263,8 @@ $result = $database->query($sqlmain);
             </div>
             '; 
         }elseif($action=='view'){
-            $sqlmain= "select * from counsellor where counid=?";
-            $stmt = $database->prepare($sqlmain);
+            $sqlm= "select * from counsellor where counid=?";
+            $stmt = $database->prepare($sqlm);
             $stmt->bind_param("i",$id);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -259,8 +273,8 @@ $result = $database->query($sqlmain);
             $email=$row["counemail"];
             $spe=$row["specialties"];
             
-            $sqlmain= "select sname from specialties where id=?";
-            $stmt = $database->prepare($sqlmain);
+            $sqlm= "select sname from specialties where id=?";
+            $stmt = $database->prepare($sqlm);
             $stmt->bind_param("s",$spe);
             $stmt->execute();
             $spcil_res = $stmt->get_result();
@@ -311,12 +325,12 @@ $result = $database->query($sqlmain);
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="nic" class="form-label">NIC: </label>
+                                    <label for="idnum" class="form-label">ID Number: </label>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                '.$nic.'<br><br>
+                                '.$idnum.'<br><br>
                                 </td>
                             </tr>
                             <tr>
@@ -357,6 +371,9 @@ $result = $database->query($sqlmain);
             </div>
             </div>
             ';  
+    } else  
+    {
+    echo "\$action is not set <br>"; 
     }
 }
 

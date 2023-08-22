@@ -12,7 +12,7 @@
         //print_r($_POST);
         $result= $database->query("select * from webuser");
         $name=$_POST['name'];
-        $idnum=$_POST['idnum'];
+        $idnum=$_POST['counidnum'];
         $oldemail=$_POST["oldemail"];
         $spec=$_POST['spec'];
         $email=$_POST['email'];

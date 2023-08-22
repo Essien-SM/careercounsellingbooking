@@ -5,7 +5,7 @@ include('includes/topbar.php');
 
 
 <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4">
         <a href="index.php"><button class="h3 mb-2 btn btn-primary" type="button">
                 < Back </button></a>
         <form action="" method="post">
@@ -30,14 +30,22 @@ include('includes/topbar.php');
                 </button>
             </div>
         </form>
-        <p class="text-center">
-            <?php
-            date_default_timezone_set('Asia/Kolkata');
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                Today's Date:
+                <p class="text-center text-gray-900 h5">
+                    <?php
+                    date_default_timezone_set('Asia/Kolkata');
 
-            $date = date('Y-m-d');
-            echo $date;
-            ?>
-        </p>
+                    $date = date('Y-m-d');
+                    echo $date;
+                    ?>
+                </p>
+            </div>
+            <div>
+                <button class="btn-label" style="display: flex;justify-content: center;align-items: center;"><img src="../img/calendar.svg" width="100%"></button>
+            </div>
+        </div>
     </div>
 
 

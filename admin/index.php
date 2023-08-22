@@ -8,10 +8,11 @@ include('includes/topbar.php');
 <div class="container-fluid">
     <!-- Sidebar Toggle (Topbar) -->
 
-    <div class="d-sm-flex align-items-center justify-content-around mb-3 gap-4">
-        <form action="counsellor.php" method="post">
+    <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-3">
+        <div></div>
+        <form class="mb-3" action="counsellor.php" method="post">
             <div class="" style="display:flex; flex-direction:row; margin:auto;">
-                <input class="form-control" type="search" name="search" aria-label="default input example" style="width: 35rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
+                <input class="form-control" type="search" name="search" aria-label="default input example" style="width: 20rem; margin-right:0.4rem" placeholder="Search Counsellor name or Email" list="counsellors">&nbsp;&nbsp;
 
                 <?php
                 echo '<datalist id="counsellors">';
@@ -38,7 +39,7 @@ include('includes/topbar.php');
 
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class="text-center text-gray-900 h3">
+                <p class="text-center text-gray-900 h5">
                     <?php
                     date_default_timezone_set('Asia/Kolkata');
 
@@ -151,96 +152,6 @@ include('includes/topbar.php');
                 </div>
             </div>
         </div>
-
-        <!-- <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-5 col-lg-6">
-                            <h2 class="text-gray-900">Upcoming Appointments until Next Monday</h2>
-                            <p>Here's Quick access to Upcoming Appointments until 7 days
-                                More details available in @Appointment section.</p>
-                            <div class="card border-left-primary shadow" style="width: 28rem; max-height: 300px; overflow-y: auto;">
-                                <div class="card-body">
-                                    <table class="table table-borderless">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-
-
-                            </div>
-                            <div class="d-grid gap-2" style="width: 28rem;">
-                                <button class="btn btn-primary btn-block" type="button">Button</button>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0">
-                            <h2 class="text-gray-900">Upcoming Sessions until Next Monday</h2>
-                            <p>Here's Quick access to Upcoming Sessions that Scheduled until 7 days
-                                Add,Remove and Many features available in @Schedule section.</p>
-                            <div class="card" style="width: 28rem;">
-                                <div class="card-body">
-                                    <table class="table table-borderless">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="d-grid gap-2">
-                                        <button class="btn btn-primary btn-block" type="button">Button</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
 
 
 

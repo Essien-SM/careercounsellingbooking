@@ -119,15 +119,15 @@
 
           <div class="form-group">
             <label for="usermail">Name:</label>
-            <input type="text" class="form-control" name="username">
+            <input type="text" class="form-control" name="username" placeholder="Fullname">
           </div>
           <div class="form-group">
             <label for="usermail">Email:</label>
-            <input type="email" class="form-control" name="newemail">
+            <input type="email" class="form-control" name="newemail" placeholder="Email">
           </div>
           <div class="form-group">
-            <label for="usermail">ID number:</label>
-            <input type="text" class="form-control" name="idnum">
+            <label for="usermail">ID:</label>
+            <input type="text" class="form-control" name="idnum" placeholder="ID Number">
           </div>
           <div class="form-group">
             <label for="usermail">Date of Birth:</label>
@@ -135,7 +135,7 @@
           </div>
           <div class="form-group">
             <label for="usermail">Mobile Number:</label>
-            <input type="text" class="form-control" name="tel" pattern="[0]{1}[0-9]{9}">
+            <input type="text" class="form-control" name="tel" pattern="[0]{1}[0-9]{9}" placeholder="Telephone Number">
           </div>
           <div class="form-group">
             <label for="userpassword">Password</label>
@@ -143,7 +143,7 @@
           </div>
           <div class="form-group">
             <label for="userpassword">Confirm Password</label>
-            <input type="Password" name="cpassword" class="form-control" placeholder="Password">
+            <input type="Password" name="cpassword" class="form-control" placeholder="Confrim Password">
           </div>
           <div class="form-group">
             <?php echo $error ?>

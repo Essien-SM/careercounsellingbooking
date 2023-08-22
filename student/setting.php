@@ -40,7 +40,7 @@ include('includes/topbar.php');
                 <td style="width: 25%;">
                     <a href="?action=edit&id=<?php echo $userid ?>&error=0" class="non-style-link">
                         <div class="dashboard-items setting-tabs" style="padding:20px;margin:auto;width:95%;display: flex">
-                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/icons/doctors-hover.svg');"></div>
+                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/settings.svg');"></div>
                             <div>
                                 <div class="h1-dashboard" style="font-size: 20px;">
                                     Account Settings &nbsp;
@@ -91,7 +91,7 @@ include('includes/topbar.php');
                 <td style="width: 25%;">
                     <a href="?action=drop&id=<?php echo $userid . '&name=' . $username ?>" class="non-style-link">
                         <div class="dashboard-items setting-tabs" style="padding:20px;margin:auto;width:95%;display: flex;">
-                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/icons/patients-hover.svg');"></div>
+                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/delete.svg');"></div>
                             <div>
                                 <div class="h1-dashboard" style="color: #ff5050; font-size: 22.8px;">
                                     Delete Account
@@ -318,12 +318,12 @@ if ($_GET) {
                                     
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="studidnum" class="form-label">ID Number: </label>
+                                            <label for="idnum" class="form-label">ID Number: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="studidnum" class="input-text" placeholder="ID Number" value="' . $idnum . '" required><br>
+                                            <input type="text" name="idnum" class="input-text" placeholder="ID Number" value="' . $idnum . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -344,16 +344,16 @@ if ($_GET) {
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="password" name="password" class="input-text" placeholder="Defind a Password" required><br>
+                                            <input type="password" name="password" class="input-text" placeholder="Define a Password" required><br>
                                         </td>
                                     </tr><tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="cpassword" class="form-label">Conform Password: </label>
+                                            <label for="cpassword" class="form-label">Confirm Password: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="password" name="cpassword" class="input-text" placeholder="Conform Password" required><br>
+                                            <input type="password" name="cpassword" class="input-text" placeholder="Confirm Password" required><br>
                                         </td>
                                     </tr>
                                     

@@ -6,12 +6,12 @@ include('includes/topbar.php');
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         <div class="d-flex">
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class=" text-center text-gray-900 h3">
+                <p class=" text-center text-gray-900 h5">
                     <?php
                     date_default_timezone_set('Asia/Kolkata');
 

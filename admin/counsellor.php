@@ -7,7 +7,7 @@ include('../connection.php')
 
 <div class="container-fluid">
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4">
         <a href="index.php"><button class="h3 mb-2 btn btn-primary" type="button">
                 < Back </button></a>
         <form action="" method="post">
@@ -36,13 +36,13 @@ include('../connection.php')
         <div class="d-flex">
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class="text-center text-gray-900 h3">
+                <p class="text-center text-gray-900 h5">
                     <?php
                     date_default_timezone_set('Asia/Kolkata');
-        
+
                     $date = date('Y-m-d');
                     echo $date;
-        
+
                     ?>
                 </p>
             </div>
@@ -156,7 +156,7 @@ include('../connection.php')
             </div>
         </div>
         <?php
-        if ($_GET) {
+        if (isset($_GET['id'])) {
 
             $id = $_GET["id"];
             $action = $_GET["action"];
@@ -193,7 +193,7 @@ include('../connection.php')
                 $spcil_array = $spcil_res->fetch_assoc();
                 $spcil_name = $spcil_array["sname"];
                 $idnum = $row['counidnum'];
-                $tele = $row['countel'];
+                $tel = $row['countel'];
                 echo '
             <div id="popup1" class="overlay">
                     <div class="popup">
@@ -205,12 +205,11 @@ include('../connection.php')
                             
                         </div>
                         <div style="display: flex;justify-content: center;">
-                        <div class="abc">
-                        <table width="80%" style="padding: 10px" class="sub-table scrolldown add-doc-form-container" border="0">
+                        <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
                         
                             <tr>
                                 <td>
-                                    <p style="padding: 5px;margin-bottom: 5;text-align: left;font-size: 25px;font-weight: 500;">View Details.</p>
+                                    <p style="padding: 0;margin: 5;text-align: left;font-size: 25px;font-weight: 500;">View Details.</p>
                                 </td>
                             </tr>
                             
@@ -238,7 +237,7 @@ include('../connection.php')
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="counidnum" class="form-label">ID Number: </label>
+                                    <label for="idnum" class="form-label">ID Number: </label>
                                 </td>
                             </tr>
                             <tr>
@@ -248,12 +247,12 @@ include('../connection.php')
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="Tele" class="form-label">Telephone: </label>
+                                    <label for="tel" class="form-label">Telephone: </label>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                ' . $tele . '<br><br>
+                                ' . $tel . '<br><br>
                                 </td>
                             </tr>
                             <tr>
@@ -279,7 +278,6 @@ include('../connection.php')
 
                         </table>
                         </div>
-                        </div>
                     </center>
                     <br><br>
             </div>
@@ -289,7 +287,7 @@ include('../connection.php')
                 $error_1 = $_GET["error"];
                 $errorlist = array(
                     '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
-                    '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconform Password</label>',
+                    '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
                     '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
                     '4' => "",
                     '0' => '',
@@ -350,12 +348,12 @@ include('../connection.php')
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="Tele" class="form-label">Telephone: </label>
+                                    <label for="tel" class="form-label">Telephone: </label>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" required><br>
+                                    <input type="tel" name="tel" class="input-text" placeholder="Telephone Number" required><br>
                                 </td>
                             </tr>
                             <tr>
@@ -395,12 +393,12 @@ include('../connection.php')
                                 </td>
                             </tr><tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="cpassword" class="form-label">Conform Password: </label>
+                                    <label for="cpassword" class="form-label">Confirm Password: </label>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <input type="password" name="cpassword" class="input-text" placeholder="Conform Password" required><br>
+                                    <input type="password" name="cpassword" class="input-text" placeholder="Confirm Password" required><br>
                                 </td>
                             </tr>
                             
@@ -431,7 +429,7 @@ include('../connection.php')
                             <center>
                             <br><br><br><br>
                                 <h2>New Record Added Successfully!</h2>
-                                <a class="close" href="Counsellor.php">&times;</a>
+                                <a class="close" href="counsellor.php">&times;</a>
                                 <div class="content">
                                     
                                     
@@ -459,12 +457,12 @@ include('../connection.php')
                 $spcil_array = $spcil_res->fetch_assoc();
                 $spcil_name = $spcil_array["sname"];
                 $idnum = $row['counidnum'];
-                $tele = $row['countel'];
+                $tel = $row['countel'];
 
                 $error_1 = $_GET["error"];
                 $errorlist = array(
                     '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
-                    '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconform Password</label>',
+                    '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
                     '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
                     '4' => "",
                     '0' => '',
@@ -520,7 +518,7 @@ include('../connection.php')
                                     
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="counidnum" class="form-label">ID Number: </label>
+                                            <label for="idnum" class="form-label">ID Number: </label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -530,12 +528,12 @@ include('../connection.php')
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="Tele" class="form-label">Telephone: </label>
+                                            <label for="tel" class="form-label">Telephone: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="' . $tele . '" required><br>
+                                            <input type="tel" name="tel" class="input-text" placeholder="Telephone Number" value="' . $tel . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -571,16 +569,16 @@ include('../connection.php')
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="password" name="password" class="input-text" placeholder="Defind a Password" required><br>
+                                            <input type="password" name="password" class="input-text" placeholder="Define a Password" required><br>
                                         </td>
                                     </tr><tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="cpassword" class="form-label">Conform Password: </label>
+                                            <label for="cpassword" class="form-label">Confirm Password: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="password" name="cpassword" class="input-text" placeholder="Conform Password" required><br>
+                                            <input type="password" name="cpassword" class="input-text" placeholder="Confirm Password" required><br>
                                         </td>
                                     </tr>
                                     
@@ -611,7 +609,7 @@ include('../connection.php')
                         <center>
                         <br><br><br><br>
                             <h2>Edit Successfully!</h2>
-                            <a class="close" href="d.php">&times;</a>
+                            <a class="close" href="counsellor.php">&times;</a>
                             <div class="content">
                                 
                                 

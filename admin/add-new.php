@@ -79,7 +79,7 @@
     }
     
 
-    header("location:counsellor.php");
+    header("location:counsellor.php?action=add&error=".$error);
     ?>
     
    

@@ -132,7 +132,7 @@
 
           <div class="form-group">
             <label for="usermail">Email address</label>
-            <input type="email" class="form-control" name="useremail">
+            <input type="email" class="form-control" name="useremail" placeholder="Email">
           </div>
           <div class="form-group">
             <label for="userpassword">Password</label>
@@ -142,7 +142,7 @@
             <?php echo $error ?>
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-          <p class="mt-3 mb-3 text-muted">Already Have an Account?<a class="font-weight-bold" href="signup.php">Sign In</a></p>
+          <p class="mt-3 mb-3 text-muted">Already Have an Account?<a class="font-weight-bold" href="signup.php">Sign Up</a></p>
         </div>
       </div>
 

@@ -6,15 +6,15 @@ include('includes/topbar.php');
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="index.php"><button class="h3 mb-2 btn btn-primary" type="button">
+    <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4">
+        <a href="appointments.php"><button class="h3 mb-2 btn btn-primary" type="button">
                 < Back </button></a>
         <p class="font-weight-bold h2">Appointment Manager</p>
 
         <div class="d-flex">
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class="text-center text-gray-900 h3">
+                <p class="text-center text-gray-900 h5">
                     <?php
 
                     date_default_timezone_set('Asia/Kolkata');
@@ -22,7 +22,7 @@ include('includes/topbar.php');
                     $today = date('Y-m-d');
                     echo $today;
 
-                    $list110 = $database->query("select  * from  schedule;");
+                    $list110 = $database->query("select  * from  appointment;");
 
                     ?>
                 </p>
@@ -85,8 +85,8 @@ include('includes/topbar.php');
         //print_r($_POST);
         $sqlpt1 = "";
         if (!empty($_POST["scheduledate"])) {
-            $sheduledate = $_POST["scheduledate"];
-            $sqlpt1 = " schedule.scheduledate='$sheduledate' ";
+            $scheduledate = $_POST["scheduledate"];
+            $sqlpt1 = " schedule.scheduledate='$scheduledate' ";
         }
 
 
@@ -97,7 +97,7 @@ include('includes/topbar.php');
         }
         //echo $sqlpt2;
         //echo $sqlpt1;
-        $sqlmain = "select appointment.appoid,schedule.scheduleid,schedule.title,counsellor.counname,student.stuname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join student on schedule.counid=counsellor.counid";
+        $sqlmain = "select appointment.appoid,schedule.scheduleid,schedule.title,counsellor.counname,student.stuname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join student on student.stuid=appointment.stuid inner join counsellor on schedule.counid=counsellor.counid";
         $sqllist = array($sqlpt1, $sqlpt2);
         $sqlkeywords = array(" where ", " and ");
         $key2 = 0;

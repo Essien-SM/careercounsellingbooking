@@ -45,7 +45,7 @@ $username = $userfetch["stuname"];
         <div class="d-flex">
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class="text-center text-gray-900 h3">
+                <p class="text-center text-gray-900 h5">
                     <?php
                     date_default_timezone_set('Asia/Kolkata');
 
@@ -167,8 +167,8 @@ $username = $userfetch["stuname"];
                             
                         </div>
                         <div style="display: flex;justify-content: center;">
-                        <a href="delete-counsellor.php?id=' . $id . '" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"<font class="tn-in-text">&nbsp;Yes&nbsp;</font></button></a>&nbsp;&nbsp;&nbsp;
-                        <a href="counsellor.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;No&nbsp;&nbsp;</font></button></a>
+                        <a href="delete-doctor.php?id=' . $id . '" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"<font class="tn-in-text">&nbsp;Yes&nbsp;</font></button></a>&nbsp;&nbsp;&nbsp;
+                        <a href="doctors.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;No&nbsp;&nbsp;</font></button></a>
 
                         </div>
                     </center>
@@ -176,7 +176,7 @@ $username = $userfetch["stuname"];
             </div>
             ';
             } elseif ($action == 'view') {
-                $sqlmain = "select * from counsellor where counid=?";
+                $sqlmain = "SELECT * FROM counsellor WHERE counid=?";
                 $stmt = $database->prepare($sqlmain);
                 $stmt->bind_param("i", $id);
                 $stmt->execute();
@@ -206,12 +206,11 @@ $username = $userfetch["stuname"];
                             
                         </div>
                         <div style="display: flex;justify-content: center;">
-                        <div class="abc">
                         <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
                         
                             <tr>
                                 <td>
-                                    <p style="padding: 0;margin-bottom: 5;text-align: left;font-size: 25px;font-weight: 500;">View Details.</p>
+                                    <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">View Details.</p><br>
                                 </td>
                             </tr>
                             
@@ -239,7 +238,7 @@ $username = $userfetch["stuname"];
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="counidnum" class="form-label">ID Number: </label>
+                                    <label for="idnum" class="form-label">ID Number: </label>
                                 </td>
                             </tr>
                             <tr>
@@ -280,7 +279,6 @@ $username = $userfetch["stuname"];
 
                         </table>
                         </div>
-                        </div>
                     </center>
                     <br><br>
             </div>
@@ -292,7 +290,7 @@ $username = $userfetch["stuname"];
             <div id="popup1" class="overlay">
                     <div class="popup">
                     <center>
-                        <h2>Redirect to Counsellor sessions?</h2>
+                        <h2>Redirect to Counsellors sessions?</h2>
                         <a class="close" href="counsellor.php">&times;</a>
                         <div class="content">
                             You want to view All sessions by <br>(' . substr($name, 0, 40) . ').
@@ -314,7 +312,7 @@ $username = $userfetch["stuname"];
             </div>
             ';
             }
-        } elseif ($action == 'edit') {
+        } elseif (isset($action) && $action == 'edit') {
             $sqlmain = "select * from counsellor where counid=?";
             $stmt = $database->prepare($sqlmain);
             $stmt->bind_param("i", $id);
@@ -340,7 +338,7 @@ $username = $userfetch["stuname"];
             $error_1 = $_GET["error"];
             $errorlist = array(
                 '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
-                '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
+                '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconfirm Password</label>',
                 '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
                 '4' => "",
                 '0' => '',
@@ -388,19 +386,19 @@ $username = $userfetch["stuname"];
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="name" class="input-text" placeholder="Counsellor Name" value="' . $name . '" required><br>
+                                            <input type="text" name="name" class="input-text" placeholder="Doctor Name" value="' . $name . '" required><br>
                                         </td>
                                         
                                     </tr>
                                     
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="counidnum" class="form-label">ID Number: </label>
+                                            <label for="idnum" class="form-label">ID Number: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="counidnum" class="input-text" placeholder="ID Number" value="' . $idnum . '" required><br>
+                                            <input type="text" name="nic" class="input-text" placeholder="NIC Number" value="' . $idnum . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>
@@ -446,16 +444,16 @@ $username = $userfetch["stuname"];
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="password" name="password" class="input-text" placeholder="Defind a Password" required><br>
+                                            <input type="password" name="password" class="input-text" placeholder="Define a Password" required><br>
                                         </td>
                                     </tr><tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="cpassword" class="form-label">Conform Password: </label>
+                                            <label for="cpassword" class="form-label">Confirm Password: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="password" name="cpassword" class="input-text" placeholder="Conform Password" required><br>
+                                            <input type="password" name="cpassword" class="input-text" placeholder="Confirm Password" required><br>
                                         </td>
                                     </tr>
                                     

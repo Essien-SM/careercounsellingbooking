@@ -6,14 +6,15 @@ include('includes/topbar.php');
 
 
 <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4 gap-4">
+    <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4 gap-4">
         <button class="btn btn-primary" type="button">
             < Back </button>
                 <h5 class="font-weight-bold mb-0 text-gray-800">Settings</h5>
 
                 <div class="d-flex">
                     <div class="d-flex flex-column">
-                        <p class="h3 text-gray-900 text-center">
+                        Today's Date:
+                        <p class="h5 text-gray-900 text-center">
                             <?php
                             date_default_timezone_set('Asia/Kolkata');
 
@@ -46,7 +47,7 @@ include('includes/topbar.php');
                 <td style="width: 25%;">
                     <a href="?action=edit&id=<?php echo $userid ?>&error=0" class="non-style-link">
                         <div class="dashboard-items setting-tabs" style="padding:20px;margin:auto;width:95%;display: flex">
-                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/icons/doctors-hover.svg');"></div>
+                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/icons/accountSettings.svg');"></div>
                             <div>
                                 <div class="h1-dashboard" style="font-size: 20px;">
                                     Account Settings &nbsp;
@@ -97,7 +98,7 @@ include('includes/topbar.php');
                 <td style="width: 25%;">
                     <a href="?action=drop&id=<?php echo $userid . '&name=' . $username ?>" class="non-style-link">
                         <div class="dashboard-items setting-tabs" style="padding:20px;margin:auto;width:95%;display: flex;">
-                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/icons/patients-hover.svg');"></div>
+                            <div class="btn-icon-back dashboard-icons-setting" style="background-image: url('../img/delete.svg');"></div>
                             <div>
                                 <div class="h1-dashboard" style="color: #ff5050; font-size: 20px;">
                                     Delete Account
@@ -163,7 +164,7 @@ if ($_GET) {
                         
                         <a class="close" href="setting.php">&times;</a>
                         <div class="content">
-                            eDoc Web App<br>                   
+                            Web App<br>                   
                         </div>
                         <div style="display: flex;justify-content: center;">
                         
@@ -199,7 +200,7 @@ if ($_GET) {
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="nic" class="form-label">ID: </label>
+                                    <label for="nic" class="form-label">ID Number: </label>
                                 </td>
                             </tr>
                             <tr>
@@ -263,7 +264,7 @@ if ($_GET) {
         $error_1 = $_GET["error"];
         $errorlist = array(
             '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
-            '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconform Password</label>',
+            '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
             '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
             '4' => "",
             '0' => '',
@@ -318,7 +319,7 @@ if ($_GET) {
                                     
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="nic" class="form-label">ID: </label>
+                                            <label for="nic" class="form-label">ID Number: </label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -373,12 +374,12 @@ if ($_GET) {
                                         </td>
                                     </tr><tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="cpassword" class="form-label">Conform Password: </label>
+                                            <label for="cpassword" class="form-label">Confirm Password: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="password" name="cpassword" class="input-text" placeholder="Conform Password" required><br>
+                                            <input type="password" name="cpassword" class="input-text" placeholder="Confirm Password" required><br>
                                         </td>
                                     </tr>
                                     

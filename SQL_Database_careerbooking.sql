@@ -35,6 +35,13 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`aemail`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`aemail`, `apassword`) VALUES
+('admin@edoc.com', '123');
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   KEY `stuid` (`stuid`),
   KEY `scheduleid` (`scheduleid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
 
 
 -- --------------------------------------------------------
@@ -92,8 +100,6 @@ CREATE TABLE IF NOT EXISTS `student` (
   PRIMARY KEY (`stuid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-
-
 -- --------------------------------------------------------
 
 --
@@ -112,7 +118,6 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   KEY `counid` (`counid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
-
 -- --------------------------------------------------------
 
 --
@@ -125,6 +130,20 @@ CREATE TABLE IF NOT EXISTS `specialties` (
   `sname` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `specialties`
+--
+
+INSERT INTO `specialties` (`id`, `sname`) VALUES
+(1, 'Career Counseling'),
+(2, 'Psychological Counseling'),
+(3, 'Mental Health Counseling'),
+(4, 'Job Placement Services'),
+(5, 'Resume Building'),
+(6, 'Interview Coaching'),
+(7, 'Substance Abuse Counseling'),
+(8, 'Diversity and Inclusion Counseling');
 
 
 -- --------------------------------------------------------
@@ -140,6 +159,12 @@ CREATE TABLE IF NOT EXISTS `webuser` (
   PRIMARY KEY (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `webuser` (`email`, `usertype`) VALUES
+('admin@edoc.com', 'a');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

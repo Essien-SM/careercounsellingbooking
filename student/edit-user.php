@@ -1,4 +1,3 @@
-
 <?php
     
     
@@ -14,7 +13,6 @@
         $name=$_POST['name'];
         $idnum=$_POST['idnum'];
         $oldemail=$_POST["oldemail"];
-        $address=$_POST['address'];
         $email=$_POST['email'];
         $tele=$_POST['Tele'];
         $password=$_POST['password'];
@@ -29,7 +27,7 @@
             $stmt->bind_param("s",$email);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+            //$resultqq= $database->query("select * from doctor where docid='$id';");
             if($result->num_rows==1){
                 $id2=$result->fetch_assoc()["stuid"];
             }else{

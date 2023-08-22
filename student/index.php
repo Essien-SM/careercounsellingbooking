@@ -7,12 +7,12 @@ include('includes/topbar.php');
 
     <!-- Page Heading -->
     <div style="margin-top:100px" class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Home</h1>
+        <h1 class="h3 mb-3 text-gray-800">Home</h1>
 
         <div class="d-flex">
             <div class="d-flex flex-column">
                 Today's Date:
-                <p class="text-center text-gray-900 h3">
+                <p class="text-center text-gray-900 h5">
                     <?php
                     date_default_timezone_set('Asia/Kolkata');
 
@@ -43,8 +43,8 @@ include('includes/topbar.php');
                 <h5 class="card-title mb-4">Welcome!</h5>
                 <h3 class="card-subtitle mb-4"><?php echo substr($username, 0, 13)  ?>.</h3>
                 <p class="h6 card-text mb-5" style="font-weight:600">Haven't any idea about counsellor? no problem let's jumping to
-                    <a href="counsellor.php" class="non-style-link"><b>"All Counsellor"</b></a> section or
-                    <a href="schedule.php" class="non-style-link"><b>"Sessions"</b> </a><br>
+                    <a href="counsellor.php" class="non-style-link"><b class="text-primary">"All Counsellor"</b></a> section or
+                    <a href="schedule.php" class="non-style-link"><b class="text-primary">"Sessions"</b> </a><br>
                     Track your past and future appointments history.<br>Also find out the expected arrival time of your counsellor.
                 </p>
                 <div class="mb-4">

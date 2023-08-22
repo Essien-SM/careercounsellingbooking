@@ -39,7 +39,7 @@
             }else{
 
                 
-                $sql1="update counsellor set counemail='$email',counname='$name',counpassword='$password',counid='$idnum',countel='$tele',specialties=$spec where counid=$id ;";
+                $sql1="update counsellor set counemail='$email',counname='$name',counpassword='$password',counidnum='$idnum',countel='$tele',specialties=$spec where counid=$id ;";
                 $database->query($sql1);
 
                 $sql1="update webuser set email='$email' where email='$oldemail' ;";
