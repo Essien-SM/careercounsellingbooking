@@ -52,60 +52,56 @@
 
   $_SESSION["date"] = $date;
 
-
-  //import database
+  // Import database
   include("connection.php");
 
-
-
-
-
   if ($_POST) {
+    $result = $database->query("SELECT * FROM webuser");
 
-    $result= $database->query("select * from webuser");
+    $name = $_POST['username'];
+    $email = $_POST['newemail'];
+    $idnum = $_POST['idnum'];
+    $dob = $_POST['dob'];
+    $tel = $_POST['tel'];
+    $newpassword = $_POST['newpassword'];
+    $cpassword = $_POST['cpassword'];
 
-    $name=$_POST['username'];
-    $email=$_POST['newemail'];
-    $idnum=$_POST['idnum'];
-    $dob=$_POST['dob'];
-    $tel=$_POST['tel'];
-    $newpassword=$_POST['newpassword'];
-    $cpassword=$_POST['cpassword'];
-    
-    if ($newpassword==$cpassword){
-        $sqlmain= "select * from webuser where email=?;";
+    // Email validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Invalid email format</label>';
+    } else {
+      // Sanitize email
+      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+      if ($newpassword == $cpassword) {
+        $sqlmain = "SELECT * FROM webuser WHERE email = ?;";
         $stmt = $database->prepare($sqlmain);
-        $stmt->bind_param("s",$email);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
-        if($result->num_rows==1){
-            $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>';
-        }else{
-            //TODO
-            $database->query("insert into student(stuemail,stuname,stupassword, studidnum,studob,stutel) values('$email','$name','$newpassword','$idnum','$dob','$tel');");
-            $database->query("insert into webuser values('$email','s')");
+        if ($result->num_rows == 1) {
+          $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>';
+        } else {
+          // TODO: Hash the password
+          $hashedPassword = password_hash($newpassword, PASSWORD_DEFAULT);
 
-            //print_r("insert into patient values($pid,'$email','$fname','$lname','$newpassword','$address','$nic','$dob','$tele');");
-            $_SESSION["user"]=$email;
-            $_SESSION["usertype"]="s";
-            $_SESSION["username"]=$name;
+          $database->query("INSERT INTO student(stuemail, stuname, stupassword, studidnum, studob, stutel) VALUES ('$email', '$name', '$hashedPassword', '$idnum', '$dob', '$tel');");
+          $database->query("INSERT INTO webuser VALUES ('$email', 's');");
 
-            header('Location: student/index.php');
-            $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>';
+          $_SESSION["user"] = $email;
+          $_SESSION["usertype"] = "s";
+          $_SESSION["username"] = $name;
+
+          header('Location: student/index.php');
+          $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>';
         }
-        
-    }else{
-        $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconform Password</label>';
+      } else {
+        $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>';
+      }
     }
-
-
-
-    
-}else{
-    //header('location: signup.php');
-    $error='<label for="promter" class="form-label"></label>';
-}
-
+  } else {
+    $error = '<label for="promter" class="form-label"></label>';
+  }
   ?>
 
   <main class="form-signin">

@@ -52,73 +52,68 @@
 
   $_SESSION["date"] = $date;
 
-
   //import database
   include("connection.php");
 
-
-
-
-
   if ($_POST) {
-
     $email = $_POST['useremail'];
     $password = $_POST['userpassword'];
 
     $error = '<label for="promter" class="form-label"></label>';
 
-    $result = $database->query("select * from webuser where email='$email'");
-    if ($result->num_rows == 1) {
-      $utype = $result->fetch_assoc()['usertype'];
-      if ($utype == 's') {
-        //TODO
-        $checker = $database->query("select * from student where stuemail='$email' and stupassword='$password'");
-        if ($checker->num_rows == 1) {
-
-
-          //   Patient dashbord
-          $_SESSION['user'] = $email;
-          $_SESSION['usertype'] = 's';
-
-          header('location: student/index.php');
-        } else {
-          $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
-        }
-      } elseif ($utype == 'a') {
-        //TODO
-        $checker = $database->query("select * from admin where aemail='$email' and apassword='$password'");
-        if ($checker->num_rows == 1) {
-
-
-          //   Admin dashbord
-          $_SESSION['user'] = $email;
-          $_SESSION['usertype'] = 'a';
-
-          header('location: admin/index.php');
-        } else {
-          $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
-        }
-      } elseif ($utype == 'c') {
-        //TODO
-        $checker = $database->query("select * from counsellor where counemail='$email' and counpassword='$password'");
-        if ($checker->num_rows == 1) {
-
-
-          //   counsellor dashbord
-          $_SESSION['user'] = $email;
-          $_SESSION['usertype'] = 'c';
-          header('location: counsellors/index.php');
-        } else {
-          $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
-        }
-      }
+    // Email validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Invalid email format</label>';
     } else {
-      $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">We cant found any acount for this email.</label>';
+      // Sanitize email
+      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+      $result = $database->query("SELECT * FROM webuser WHERE email='$email'");
+      if ($result->num_rows == 1) {
+        $utype = $result->fetch_assoc()['usertype'];
+        if ($utype == 's') {
+          //TODO
+          $checker = $database->query("SELECT * FROM student WHERE stuemail='$email' AND stupassword='$password'");
+          if ($checker->num_rows == 1) {
+            //   Student dashboard
+            $_SESSION['user'] = $email;
+            $_SESSION['usertype'] = 's';
+
+            header('location: student/index.php');
+          } else {
+            $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
+          }
+        } elseif ($utype == 'a') {
+          //TODO
+          $checker = $database->query("SELECT * FROM admin WHERE aemail='$email' AND apassword='$password'");
+          if ($checker->num_rows == 1) {
+            //   Admin dashboard
+            $_SESSION['user'] = $email;
+            $_SESSION['usertype'] = 'a';
+
+            header('location: admin/index.php');
+          } else {
+            $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
+          }
+        } elseif ($utype == 'c') {
+          //TODO
+          $checker = $database->query("SELECT * FROM counsellor WHERE counemail='$email' AND counpassword='$password'");
+          if ($checker->num_rows == 1) {
+            //   Counsellor dashboard
+            $_SESSION['user'] = $email;
+            $_SESSION['usertype'] = 'c';
+            header('location: counsellors/index.php');
+          } else {
+            $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Wrong credentials: Invalid email or password</label>';
+          }
+        }
+      } else {
+        $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">We can\'t find any account for this email.</label>';
+      }
     }
   } else {
     $error = '<label for="promter" class="form-label">&nbsp;</label>';
   }
-
   ?>
 
   <main class="form-signin">

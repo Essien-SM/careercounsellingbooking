@@ -35,7 +35,7 @@ $username=$userfetch["stuname"];
             </button>
 
             <div class="d-flex justify-content-between">
-                <a class="text-left" href="index.html">
+                <a class="text-left" href="index.php" style="text-decoration: none;">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>

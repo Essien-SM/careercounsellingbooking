@@ -1,0 +1,100 @@
+<tr>
+                                <form action="add-new.php" method="POST" class="add-new-form">
+                                <td class="label-td" colspan="2">
+                                    <label for="name" class="form-label">Name: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="name" class="input-text" placeholder="Counsellor Name" required><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="Email" class="form-label">Email: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="email" name="email" class="input-text" placeholder="Email Address" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="counidnum" class="form-label">ID Number: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="text" name="counidnum" class="input-text" placeholder="ID Number" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="tel" class="form-label">Telephone: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="tel" name="tel" class="input-text" placeholder="Telephone Number" required><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="spec" class="form-label">Choose specialties: </label>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <select name="spec" id="" class="box" >';
+
+
+                    $list11 = $database->query("select  * from  specialties order by sname asc;");
+
+                    for ($y = 0; $y < $list11->num_rows; $y++) {
+                        $row00 = $list11->fetch_assoc();
+                        $sn = $row00["sname"];
+                        $id00 = $row00["id"];
+                        echo "<option value=" . $id00 . ">$sn</option><br/>";
+                    };
+
+
+
+
+                    echo     '       </select><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="password" class="form-label">Password: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="password" name="password" class="input-text" placeholder="Define a Password" required><br>
+                                </td>
+                            </tr><tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="cpassword" class="form-label">Confirm Password: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <input type="password" name="cpassword" class="input-text" placeholder="Confirm Password" required><br>
+                                </td>
+                            </tr>
+                            
+                
+                            <tr>
+                                <td colspan="2">
+                                    <input type="reset" value="Reset" class="login-btn btn-primary-soft btn" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                
+                                    <input type="submit" value="Add" class="login-btn btn-primary btn">
+                                </td>
+                
+                            </tr>
+                           
+                            </form>
+                            </tr>

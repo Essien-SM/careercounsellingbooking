@@ -284,37 +284,38 @@ include('../connection.php')
             </div>
             ';
             } elseif ($action == 'add') {
-                $error_1 = $_GET["error"];
-                $errorlist = array(
-                    '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
-                    '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
-                    '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
-                    '4' => "",
-                    '0' => '',
+                if (isset($_GET["error"])) {
+                    $error_1 = $_GET["error"];
+                    $errorlist = array(
+                        '1' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>',
+                        '2' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>',
+                        '3' => '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>',
+                        '4' => "",
+                        '0' => '',
+                    );
+            
+                    if ($error_1 != '4') {
+                        echo '
+                        <div id="popup1" class="overlay">
+                            <div class="popup">
+                                <center>
+                                    <a class="close" href="counsellor.php">&times;</a>
+                                    <div style="display: flex;justify-content: center;">
+                                        <div class="abc">
+                                            <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
+                                                <tr>
+                                                    <td class="label-td" colspan="2">' .
+                                                        $errorlist[$error_1]
+                                                    . '</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">Add New Counsellor.</p><br><br>
+                                                    </td>
+                                                </tr>
+                                                <!-- Rest of the form code goes here -->
 
-                );
-                if ($error_1 != '4') {
-                    echo '
-            <div id="popup1" class="overlay">
-                    <div class="popup">
-                    <center>
-                    
-                        <a class="close" href="counsellor.php">&times;</a> 
-                        <div style="display: flex;justify-content: center;">
-                        <div class="abc">
-                        <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
-                        <tr>
-                                <td class="label-td" colspan="2">' .
-                        $errorlist[$error_1]
-                        . '</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p style="padding: 0;margin: 0;text-align: left;font-size: 25px;font-weight: 500;">Add New Counsellor.</p><br><br>
-                                </td>
-                            </tr>
-                            
-                            <tr>
+                                                <tr>
                                 <form action="add-new.php" method="POST" class="add-new-form">
                                 <td class="label-td" colspan="2">
                                     <label for="name" class="form-label">Name: </label>
@@ -414,36 +415,40 @@ include('../connection.php')
                            
                             </form>
                             </tr>
-                        </table>
-                        </div>
-                        </div>
-                    </center>
-                    <br><br>
-            </div>
-            </div>
-            ';
-                } else {
-                    echo '
-                    <div id="popup1" class="overlay">
-                            <div class="popup">
-                            <center>
-                            <br><br><br><br>
-                                <h2>New Record Added Successfully!</h2>
-                                <a class="close" href="counsellor.php">&times;</a>
-                                <div class="content">
-                                    
-                                    
-                                </div>
-                                <div style="display: flex;justify-content: center;">
-                                
-                                <a href="counsellor.php" class="non-style-link"><button  class="btn-primary btn"  style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;"><font class="tn-in-text">&nbsp;&nbsp;OK&nbsp;&nbsp;</font></button></a>
-
-                                </div>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </center>
                                 <br><br>
-                            </center>
-                    </div>
-                    </div>
-        ';
+                            </div>
+                        </div>
+                        ';
+                    } else {
+                        echo '
+                        <div id="popup1" class="overlay">
+                            <div class="popup">
+                                <center>
+                                    <br><br><br><br>
+                                    <h2>New Record Added Successfully!</h2>
+                                    <a class="close" href="counsellor.php">&times;</a>
+                                    <div class="content">
+                                    </div>
+                                    <div style="display: flex;justify-content: center;">
+                                        <a href="counsellor.php" class="non-style-link">
+                                            <button class="btn-primary btn" style="display: flex;justify-content: center;align-items: center;margin:10px;padding:10px;">
+                                                <font class="tn-in-text">&nbsp;&nbsp;OK&nbsp;&nbsp;</font>
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <br><br>
+                                </center>
+                            </div>
+                        </div>
+                        ';
+                    }
+                } else {
+                    // Handle the case when the "error" parameter is not present in the URL
+                    // You can display a default error message or redirect the user to another page
                 }
             } elseif ($action == 'edit') {
                 $sqlmain = "select * from counsellor where counid='$id'";
