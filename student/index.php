@@ -38,10 +38,10 @@ include('includes/topbar.php');
     <!-- Content Row -->
     <div class="row">
 
-        <div class="card text-gray-900" style="width: 100vw; background-color: #e6edfc;">
+        <div class="card text-gray-900" style="width: 100vw; background-image: url('./img/b1.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; color: white;">
             <div class="card-body">
                 <h5 class="card-title mb-4">Welcome!</h5>
-                <h3 class="card-subtitle mb-4"><?php echo substr($username, 0, 13)  ?>.</h3>
+                <h3 class="card-subtitle mb-4" style="font-weight:800"><?php echo $username  ?>.</h3>
                 <p class="h6 card-text mb-5" style="font-weight:600">Haven't any idea about counsellor? no problem let's jumping to
                     <a href="counsellor.php" class="non-style-link"><b class="text-primary">"All Counsellor"</b></a> section or
                     <a href="schedule.php" class="non-style-link"><b class="text-primary">"Sessions"</b> </a><br>

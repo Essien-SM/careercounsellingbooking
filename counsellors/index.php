@@ -37,7 +37,7 @@ include('includes/topbar.php');
     <!-- Content Row -->
     <div class="row">
 
-        <div class="card text-gray-900" style="width: 100vw; background-color: #e6edfc;">
+        <div class="card text-gray-900" style="width: 100vw; background-image: url('./img/b2.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
             <div class="card-body">
                 <h5 class="card-title mb-4" style="font-weight:700">Welcome!</h5>
                 <h3 class="card-subtitle mb-4" style="font-weight:800"><?php echo $username  ?>.</h3>

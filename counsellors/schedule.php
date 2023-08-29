@@ -164,7 +164,7 @@ include('includes/topbar.php');
             </div>
             '; 
         }elseif($action=='view'){
-            $sqlmain= "select schedule.scheduleid,schedule.title,counsellor.counname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join on schedule.counid=counsellor.counid  where  schedule.scheduleid=$id";
+            $sqlmain= "select schedule.scheduleid,schedule.title,counsellor.counname,schedule.scheduledate,schedule.scheduletime,schedule.nop from schedule inner join counsellor on schedule.counid=counsellor.counid  where  schedule.scheduleid=$id";
             $result= $database->query($sqlmain);
             $row=$result->fetch_assoc();
             $counname=$row["counname"];
@@ -232,7 +232,7 @@ include('includes/topbar.php');
                             </tr>
                             <tr>
                                 <td class="label-td" colspan="2">
-                                    <label for="Tele" class="form-label">Scheduled Time: </label>
+                                    <label for="tel" class="form-label">Scheduled Time: </label>
                                 </td>
                             </tr>
                             <tr>
@@ -301,24 +301,24 @@ include('includes/topbar.php');
                                          for ( $x=0; $x<$result->num_rows;$x++){
                                              $row=$result->fetch_assoc();
                                              $apponum=$row["apponum"];
-                                             $pid=$row["pid"];
-                                             $pname=$row["pname"];
-                                             $ptel=$row["ptel"];
+                                             $stuid=$row["stuid"];
+                                             $stuname=$row["stuname"];
+                                             $stutel=$row["stutel"];
                                              
                                              echo '<tr style="text-align:center;">
                                                 <td>
-                                                '.substr($pid,0,15).'
+                                                '.substr($stuid,0,15).'
                                                 </td>
                                                  <td style="font-weight:600;padding:25px">'.
                                                  
-                                                 substr($pname,0,25)
+                                                 substr($stuname,0,25)
                                                  .'</td >
                                                  <td style="text-align:center;font-size:23px;font-weight:500; color: var(--btnnicetext);">
                                                  '.$apponum.'
                                                  
                                                  </td>
                                                  <td>
-                                                 '.substr($ptel,0,25).'
+                                                 '.substr($stutel,0,25).'
                                                  </td>
                                                  
                                                  

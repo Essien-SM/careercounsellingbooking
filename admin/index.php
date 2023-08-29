@@ -264,7 +264,7 @@ include('includes/topbar.php');
                     </h4>
                     <p>
                         Here's Quick access to Upcoming Sessions that Scheduled until 7 days
-                        Add,Remove and Many features available in @Schedule section.
+                        Add,Remove and Many features available in @Schedule section. <br><br>
                     </p>
 
                     <!-- Project Card Example -->

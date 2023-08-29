@@ -9,6 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="shortcut icon" href="https://www.ug.edu.gh/sites/default/files/favicon_0.ico" type="image/vnd.microsoft.icon">
+
     <title>Counsellor - Dashboard</title>
 
     <!-- Custom fonts for this template-->

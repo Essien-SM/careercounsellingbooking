@@ -53,8 +53,8 @@ if ($_POST) {
 
                 for ($y = 0; $y < $list11->num_rows; $y++) {
                     $row00 = $list11->fetch_assoc();
-                    $d = $row00["counname"];
-                    $c = $row00["counemail"];
+                    $d = $row00["stuname"];
+                    $c = $row00["stuemail"];
                     echo "<option value='$d'><br/>";
                     echo "<option value='$c'><br/>";
                 };
@@ -189,6 +189,123 @@ if ($_POST) {
                 </table>
             </div>
         </div>
+        <?php
+        if ($_GET) {
+
+            $id = $_GET["id"];
+            $action = $_GET["action"];
+            $sqlmain = "select * from student where stuid='$id'";
+            $result = $database->query($sqlmain);
+            $row = $result->fetch_assoc();
+            $name = $row["stuname"];
+            $email = $row["stuemail"];
+            $idnum = $row["studidnum"];
+            $dob = $row["studob"];
+            $tel = $row["stutel"];
+            echo '
+            <div id="popup1" class="overlay">
+                    <div class="popup">
+                    <center>
+                        <a class="close" href="students.php">&times;</a>
+                        <div class="content">
+
+                        </div>
+                        <div style="display: flex;justify-content: center;">
+                        <table width="80%" class="sub-table scrolldown add-doc-form-container" border="0">
+                        
+                            <tr>
+                                <td>
+                                    <p style="padding: 0;margin-bottom: 10px;text-align: left;font-size: 25px;font-weight: 500;">View Details.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                
+                                <td class="label-td" colspan="2">
+                                    <label for="name" class="form-label">Student ID: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    Stu-' . $id . '<br><br>
+                                </td>
+                                
+                            </tr>
+                            
+                            <tr>
+                                
+                                <td class="label-td" colspan="2">
+                                    <label for="name" class="form-label">Name: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    ' . $name . '<br><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="Email" class="form-label">Email: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                ' . $email . '<br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="studidnum" class="form-label">ID Number: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                ' . $idnum . '<br><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    <label for="stutel" class="form-label">Telephone: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                ' . $tel . '<br><br>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                
+                                <td class="label-td" colspan="2">
+                                    <label for="name" class="form-label">Date of Birth: </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-td" colspan="2">
+                                    ' . $dob . '<br><br>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="students.php"><input type="button" value="OK" class="login-btn btn-primary-soft btn" ></a>
+                                
+                                    
+                                </td>
+                
+                            </tr>
+                           
+
+                        </table>
+                        </div>
+                    </center>
+                    <br><br>
+            </div>
+            </div>
+            ';
+        };
+
+        ?>
     </div>
 </div>
 
