@@ -523,7 +523,7 @@ include('../connection.php')
                                     
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="idnum" class="form-label">ID Number: </label>
+                                            <label for="counidnum" class="form-label">ID Number: </label>
                                         </td>
                                     </tr>
                                     <tr>

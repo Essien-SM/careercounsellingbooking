@@ -259,7 +259,7 @@ if ($_GET) {
         $spcil_array = $spcil_res->fetch_assoc();
         $spcil_name = $spcil_array["sname"];
         $idnum = $row['counidnum'];
-        $tele = $row['countel'];
+        $tel = $row['countel'];
 
         $error_1 = $_GET["error"];
         $errorlist = array(
@@ -329,12 +329,12 @@ if ($_GET) {
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="Tele" class="form-label">Telephone: </label>
+                                            <label for="tel" class="form-label">Telephone: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="' . $tele . '" required><br>
+                                            <input type="tel" name="tel" class="input-text" placeholder="Telephone Number" value="' . $tel . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>

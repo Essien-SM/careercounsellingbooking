@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
-  <title>Signin Template · Bootstrap v5.0</title>
+  <title>Signup</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
@@ -39,7 +39,7 @@
 
 <body>
 
-  <?php
+<?php
 
   session_start();
 
@@ -52,57 +52,62 @@
 
   $_SESSION["date"] = $date;
 
-  // Import database
+
+  //import database
   include("connection.php");
 
+
+
+
+
   if ($_POST) {
-    $result = $database->query("SELECT * FROM webuser");
 
-    $name = $_POST['username'];
-    $email = $_POST['newemail'];
-    $idnum = $_POST['idnum'];
-    $dob = $_POST['dob'];
-    $tel = $_POST['tel'];
-    $newpassword = $_POST['newpassword'];
-    $cpassword = $_POST['cpassword'];
+    $result= $database->query("select * from webuser");
 
-    // Email validation
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Invalid email format</label>';
-    } else {
-      // Sanitize email
-      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-
-      if ($newpassword == $cpassword) {
-        $sqlmain = "SELECT * FROM webuser WHERE email = ?;";
+    $name=$_POST['username'];
+    $email=$_POST['newemail'];
+    $idnum=$_POST['idnum'];
+    $dob=$_POST['dob'];
+    $tel=$_POST['tel'];
+    $newpassword=$_POST['newpassword'];
+    $cpassword=$_POST['cpassword'];
+    
+    if ($newpassword==$cpassword){
+        $sqlmain= "select * from webuser where email=?;";
         $stmt = $database->prepare($sqlmain);
-        $stmt->bind_param("s", $email);
+        $stmt->bind_param("s",$email);
         $stmt->execute();
         $result = $stmt->get_result();
-        if ($result->num_rows == 1) {
-          $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>';
-        } else {
-          // TODO: Hash the password
-          $hashedPassword = password_hash($newpassword, PASSWORD_DEFAULT);
+        if($result->num_rows==1){
+            $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Already have an account for this Email address.</label>';
+        }else{
+            //TODO
+            $database->query("insert into student(stuemail,stuname,stupassword, studidnum,studob,stutel) values('$email','$name','$newpassword','$idnum','$dob','$tel');");
+            $database->query("insert into webuser values('$email','s')");
 
-          $database->query("INSERT INTO student(stuemail, stuname, stupassword, studidnum, studob, stutel) VALUES ('$email', '$name', '$hashedPassword', '$idnum', '$dob', '$tel');");
-          $database->query("INSERT INTO webuser VALUES ('$email', 's');");
+            
+            $_SESSION["user"]=$email;
+            $_SESSION["usertype"]="s";
+            $_SESSION["username"]=$name;
 
-          $_SESSION["user"] = $email;
-          $_SESSION["usertype"] = "s";
-          $_SESSION["username"] = $name;
-
-          header('Location: student/index.php');
-          $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>';
+            header('Location: student/index.php');
+            $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;"></label>';
         }
-      } else {
-        $error = '<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Confirmation Error! Reconfirm Password</label>';
-      }
+        
+    }else{
+        $error='<label for="promter" class="form-label" style="color:rgb(255, 62, 62);text-align:center;">Password Conformation Error! Reconform Password</label>';
     }
-  } else {
-    $error = '<label for="promter" class="form-label"></label>';
-  }
+
+
+
+    
+}else{
+    //header('location: signup.php');
+    $error='<label for="promter" class="form-label"></label>';
+}
+
   ?>
+
 
   <main class="form-signin">
     <form action="" method="POST">
@@ -114,7 +119,7 @@
           </div>
 
           <div class="form-group">
-            <label for="usermail">Name:</label>
+            <label for="name">Name:</label>
             <input type="text" class="form-control" name="username" placeholder="Fullname">
           </div>
           <div class="form-group">
@@ -139,7 +144,7 @@
           </div>
           <div class="form-group">
             <label for="userpassword">Confirm Password</label>
-            <input type="Password" name="cpassword" class="form-control" placeholder="Confrim Password">
+            <input type="Password" name="cpassword" class="form-control" placeholder="Confirm Password">
           </div>
           <div class="form-group">
             <?php echo $error ?>

@@ -257,7 +257,7 @@ if ($_GET) {
 
 
         $idnum = $row['studidnum'];
-        $tele = $row['stutel'];
+        $tel = $row['stutel'];
 
         $error_1 = $_GET["error"];
         $errorlist = array(
@@ -318,22 +318,22 @@ if ($_GET) {
                                     
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="idnum" class="form-label">ID Number: </label>
+                                            <label for="studidnum" class="form-label">ID Number: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="text" name="idnum" class="input-text" placeholder="ID Number" value="' . $idnum . '" required><br>
+                                            <input type="text" name="studidnum" class="input-text" placeholder="ID Number" value="' . $idnum . '" required><br>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <label for="Tele" class="form-label">Telephone: </label>
+                                            <label for="tel" class="form-label">Telephone: </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="label-td" colspan="2">
-                                            <input type="tel" name="Tele" class="input-text" placeholder="Telephone Number" value="' . $tele . '" required><br>
+                                            <input type="tel" name="tel" class="input-text" placeholder="Telephone Number" value="' . $tel . '" required><br>
                                         </td>
                                     </tr>
                                     

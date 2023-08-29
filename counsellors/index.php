@@ -69,7 +69,7 @@ include('includes/topbar.php');
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <p>icon</p>
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@ include('includes/topbar.php');
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <p>icon</p>
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@ include('includes/topbar.php');
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <p>icon</p>
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ include('includes/topbar.php');
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <p>icon</p>
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

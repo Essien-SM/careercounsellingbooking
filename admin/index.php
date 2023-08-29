@@ -81,7 +81,7 @@ include('includes/topbar.php');
                                 <?php echo $counsellorrow->num_rows  ?>
                             </div>
                             <div class="text-xs font-weight-bold text-gray-900 text-uppercase mb-1">
-                                Advisors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Counsellors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
                         <div class="col-auto">
@@ -106,7 +106,7 @@ include('includes/topbar.php');
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ include('includes/topbar.php');
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@ include('includes/topbar.php');
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>

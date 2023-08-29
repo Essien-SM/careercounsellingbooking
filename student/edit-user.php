@@ -11,10 +11,10 @@
         //print_r($_POST);
         $result= $database->query("select * from webuser");
         $name=$_POST['name'];
-        $idnum=$_POST['idnum'];
+        $idnum=$_POST['studidnum'];
         $oldemail=$_POST["oldemail"];
         $email=$_POST['email'];
-        $tele=$_POST['Tele'];
+        $tele=$_POST['tel'];
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
         $id=$_POST['id00'];

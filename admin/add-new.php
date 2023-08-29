@@ -18,65 +18,70 @@
 <body>
 <?php
 
-session_start();
+    //learn from w3schools.com
 
-if (isset($_SESSION["user"])) {
-    if (($_SESSION["user"]) == "" || $_SESSION['usertype'] != 'a') {
+    session_start();
+
+    if(isset($_SESSION["user"])){
+        if(($_SESSION["user"])=="" or $_SESSION['usertype']!='a'){
+            header("location: ../login.php");
+        }
+
+    }else{
         header("location: ../login.php");
     }
-} else {
-    header("location: ../login.php");
-}
+    
+    
 
-// Import database
-include("../connection.php");
+    //import database
+    include("../connection.php");
 
-if ($_POST) {
-    //print_r($_POST);
-    $result = $database->query("SELECT * FROM webuser");
-    $name = $_POST['name'];
-    $idnum = $_POST['counidnum'];
-    $spec = $_POST['spec'];
-    $email = $_POST['email'];
-    $tel = $_POST['tel'];
-    $password = $_POST['password'];
-    $cpassword = $_POST['cpassword'];
 
-    // Email validation
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = '1';
-    } else {
-        // Sanitize email
-        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
-        if ($password == $cpassword) {
-            $error = '3';
-            $result = $database->query("SELECT * FROM webuser WHERE email='$email';");
-            if ($result->num_rows == 1) {
-                $error = '2';
-            } else {
-                // TODO: Hash the password
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    if($_POST){
+        //print_r($_POST);
+        $result= $database->query("select * from webuser");
+        $name=$_POST['name'];
+        $idnum=$_POST['counidnum'];
+        $spec=$_POST['spec'];
+        $email=$_POST['email'];
+        $tel=$_POST['tel'];
+        $password=$_POST['password'];
+        $cpassword=$_POST['cpassword'];
+        
+        if ($password==$cpassword){
+            $error='3';
+            $result= $database->query("select * from webuser where email='$email';");
+            if($result->num_rows==1){
+                $error='1';
+            }else{
 
-                $sql1 = "INSERT INTO counsellor(counemail, counname, counpassword, counidnum, countel, specialties) VALUES ('$email', '$name', '$hashedPassword', '$idnum', '$tel', $spec);";
-                $sql2 = "INSERT INTO webuser VALUES ('$email', 'c')";
+                $sql1="insert into counsellor(counemail,counname,counpassword,counidnum,countel,specialties) values('$email','$name','$password','$idnum','$tel',$spec);";
+                $sql2="insert into webuser values('$email','c')";
                 $database->query($sql1);
                 $database->query($sql2);
 
                 //echo $sql1;
                 //echo $sql2;
-                $error = '4';
+                $error= '4';
+                
             }
-        } else {
-            $error = '2';
+            
+        }else{
+            $error='2';
         }
+    
+    
+        
+        
+    }else{
+        //header('location: signup.php');
+        $error='3';
     }
-} else {
-    $error = '3';
-}
+    
 
-header("location: counsellor.php?action=add&error=" . $error);
-?>
+    header("location: counsellor.php?action=add&error=".$error);
+    ?>
     
    
 
